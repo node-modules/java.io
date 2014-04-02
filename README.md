@@ -54,7 +54,18 @@ TODO
 
 ## Class: `InputStream`
 
-TODO
+Any `InputStream` subclass must impl `_readByte()` and `_readBytes(buf, off, len)`.
+
+### Function: `read(buf, off, len)`
+
+* @return {Number} readed bytes size when `buf` given, otherwise return read `byte`.
+
+```js
+// read()
+// read(b)
+// read(0, 100)
+proto.read = function (b, off, len);
+```
 
 ### Class: `ObjectInputStream`
 
@@ -93,7 +104,6 @@ Impl some Java Type:
 * [ ] InputStream
   * [ ] ObjectInputStream
   * [ ] DataInputStream
-  * [ ] BlockDataInputStream
   * [ ] ByteArrayInputStream
 * [ ] Utility
   * [ ] Bits

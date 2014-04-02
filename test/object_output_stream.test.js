@@ -1,5 +1,5 @@
 /**!
- * object_output_stream - test/object_output_stream.test.js
+ * java.io - test/object_output_stream.test.js
  *
  * Copyright(c) 2014 fengmk2 and other contributors.
  * MIT Licensed

@@ -1,5 +1,5 @@
 /**!
- * outputstream - test/block_data_output_stream.test.js
+ * java.io - test/block_data_output_stream.test.js
  *
  * Copyright(c) fengmk2 and other contributors.
  * MIT Licensed
