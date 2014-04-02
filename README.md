@@ -27,6 +27,46 @@ oos.writeObject('foo');
 var bytes = byteStream.toByteArray();
 ```
 
+## Class: `OutputStream`
+
+Any `OutputStream` subclass must impl `_writeByte(byte)` and `_writeBytes(bytes)`.
+
+### Function: `write(b, off, len)`
+
+```js
+// write(100)
+// write(new Buffer('foo'))
+// write(new Buffer('foobar'), 0, 3);
+proto.write = function (b, off, len);
+```
+
+## Class: `ObjectOutputStream`
+
+TODO
+
+## Class: `ByteArrayOutputStream`
+
+TODO
+
+## Class: `DataOutputStream`
+
+TODO
+
+## Utlity: `Bits` and `types`
+
+### `Bits`
+
+Help to write primitive type to bytes.
+
+TODO
+
+### `types`
+
+Impl some Java Type:
+
+* `types.JavaString` => `java.lang.String`
+* `types.JavaObjectArray` => `Object[]`
+
 ## License
 
 (The MIT License)
