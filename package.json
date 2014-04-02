@@ -27,14 +27,13 @@
     "mocha": "*",
     "should": "3.2.0"
   },
-  "homepage": "https://github.com/fengmk2/object_output_stream",
+  "homepage": "https://github.com/node-modules/outputstream",
   "repository": {
     "type": "git",
-    "url": "git://github.com/fengmk2/object_output_stream.git",
-    "web": "https://github.com/fengmk2/object_output_stream"
+    "url": "git://github.com/node-modules/outputstream.git"
   },
   "bugs": {
-    "url": "https://github.com/fengmk2/object_output_stream/issues",
+    "url": "https://github.com/node-modules/outputstream/issues",
     "email": "fengmk2@gmail.com"
   },
   "keywords": [

@@ -1,28 +1,30 @@
-object_output_stream
+outputstream
 =======
 
-[![Build Status](https://secure.travis-ci.org/fengmk2/object_output_stream.png)](http://travis-ci.org/fengmk2/object_output_stream) [![Dependency Status](https://gemnasium.com/fengmk2/object_output_stream.png)](https://gemnasium.com/fengmk2/object_output_stream)
+[![Build Status](https://secure.travis-ci.org/node-modules/outputstream.png)](http://travis-ci.org/node-modules/outputstream) [![Dependency Status](https://gemnasium.com/fengmk2/object_output_stream.png)](https://gemnasium.com/fengmk2/outputstream)
 
-[![NPM](https://nodei.co/npm/object_output_stream.png?downloads=true&stars=true)](https://nodei.co/npm/object_output_stream/)
+[![NPM](https://nodei.co/npm/outputstream.png?downloads=true&stars=true)](https://nodei.co/npm/outputstream/)
 
-![logo](https://raw.github.com/fengmk2/object_output_stream/master/logo.png)
+![logo](https://raw.github.com/node-modules/outputstream/master/logo.png)
 
-object_output_stream desc
+Java OutputStream utils.
 
 ## Install
 
 ```bash
-$ npm install object_output_stream
+$ npm install outputstream
 ```
 
 ## Usage
 
 ```js
-var object_output_stream = require('object_output_stream');
+var outputstream = require('outputstream');
 
-object_output_stream.foo(function (err) {
+var byteStream = new ByteArrayOutputStream();
+var oos = new ObjectOutputStream(byteStream);
+oos.writeObject(utils.string('big_utf8'));
 
-});
+var bytes = byteStream.toByteArray();
 ```
 
 ## License
