@@ -19,12 +19,14 @@ var should = require('should');
 var ByteArrayOutputStream = require('../').ByteArrayOutputStream;
 var ObjectOutputStream = require('../').ObjectOutputStream;
 var utils = require('./utils');
+var types = require('../').types;
 
 function NCommand(name, params) {
-  this.id = null;
-  this.name = name;
-  this.params = params || [];
   this.isNewVersion = false;
+  this.id = new types.JavaString();
+  this.name = name;
+  // [Ljava.lang.Object;: static final long serialVersionUID = -8012369246846506644L;
+  this.params = params || [];
   // [Z isNewVersion, Ljava/lang/String; id, Ljava/lang/String; name, [Ljava/lang/Object; params]
 }
 
@@ -44,29 +46,175 @@ NCommand.prototype.toString = function () {
   return s;
 };
 
+function OneBooleanCommand(isNewVersion) {
+  this.isNewVersion = !!isNewVersion;
+}
+OneBooleanCommand.$class = 'test.OneBooleanCommand';
+OneBooleanCommand.serialVersionUID = Long.fromString('2747429540516977992');
+
+function OneStringCommand(id) {
+  this.id = new types.JavaString(id);
+}
+OneStringCommand.$class = 'test.OneStringCommand';
+OneStringCommand.serialVersionUID = Long.fromString('2747429540516977993');
+
+function TwoStringCommand(name) {
+  this.id = new types.JavaString();
+  this.name = name;
+}
+TwoStringCommand.$class = 'test.TwoStringCommand';
+TwoStringCommand.serialVersionUID = Long.fromString('2747429540516977994');
+
 describe('object_output_stream.test.js', function () {
   describe('writeObject(object)', function () {
-    it('should write a NCommand java object', function () {
+    it('should write one false boolean simple java object', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new OneBooleanCommand();
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('cmd_with_one_boolean_field');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+    });
+
+    it('should write one true boolean simple java object', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new OneBooleanCommand(true);
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('cmd_with_one_boolean_field_true');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+    });
+
+    it('should write one null string simple java object', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new OneStringCommand();
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('cmd_with_one_string_field');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+    });
+
+    it('should write one foo string simple java object', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new OneStringCommand('foo');
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('cmd_with_one_string_field_foo');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+    });
+
+    it('should write TwoStringCommand success', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new TwoStringCommand('queryServerlist');
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('cmd_with_two_string_field_queryServerlist');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+    });
+
+    it('should write NCommand java object', function () {
       var byteStream = new ByteArrayOutputStream();
       var oos = new ObjectOutputStream(byteStream);
       var cmd = new NCommand('queryServerlist');
-      console.log(cmd.toString())
       oos.writeObject(cmd);
       var bytes = byteStream.toByteArray();
-      var expectBytes = utils.bytes('object_queryServerlist_cmd');
-      bytes.should.length(expectBytes.length);
-      bytes.should.eql(expectBytes);
+      var javaBytes = utils.bytes('object_queryServerlist_cmd');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
     });
   });
 
   describe('writeObject(string)', function () {
-    it('should write string match java', function () {
+    it('should write foo string match java', function () {
       var byteStream = new ByteArrayOutputStream();
       var oos = new ObjectOutputStream(byteStream);
       oos.writeObject('foo');
       var bytes = byteStream.toByteArray();
       var expectBytes = utils.bytes('string_foo');
       bytes.should.length(expectBytes.length);
+      bytes.should.eql(expectBytes);
+    });
+
+    it('should write empty string match java', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      oos.writeObject('');
+      var bytes = byteStream.toByteArray();
+      var expectBytes = utils.bytes('string_empty');
+      bytes.should.length(expectBytes.length);
+      bytes.should.eql(expectBytes);
+    });
+
+    it('should write null string match java', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      oos.writeObject(null);
+      var bytes = byteStream.toByteArray();
+      var expectBytes = utils.bytes('string_null');
+      // bytes.should.length(expectBytes.length);
       bytes.should.eql(expectBytes);
     });
 

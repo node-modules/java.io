@@ -18,3 +18,4 @@ exports.BlockDataOutputStream = require('./lib/block_data_output_stream');
 exports.ByteArrayOutputStream = require('./lib/byte_array_output_stream');
 exports.ObjectOutputStream = require('./lib/object_output_stream');
 exports.Bits = require('./lib/bits');
+exports.types = require('./lib/types');
