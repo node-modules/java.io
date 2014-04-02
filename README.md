@@ -22,7 +22,7 @@ var outputstream = require('outputstream');
 
 var byteStream = new ByteArrayOutputStream();
 var oos = new ObjectOutputStream(byteStream);
-oos.writeObject(utils.string('big_utf8'));
+oos.writeObject('foo');
 
 var bytes = byteStream.toByteArray();
 ```

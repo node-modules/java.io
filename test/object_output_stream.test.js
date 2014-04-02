@@ -26,7 +26,7 @@ function NCommand(name, params) {
   this.id = new types.JavaString();
   this.name = name;
   // [Ljava.lang.Object;: static final long serialVersionUID = -8012369246846506644L;
-  this.params = params || [];
+  this.params = new types.JavaObjectArray(params || []);
   // [Z isNewVersion, Ljava/lang/String; id, Ljava/lang/String; name, [Ljava/lang/Object; params]
 }
 
@@ -64,6 +64,12 @@ function TwoStringCommand(name) {
 }
 TwoStringCommand.$class = 'test.TwoStringCommand';
 TwoStringCommand.serialVersionUID = Long.fromString('2747429540516977994');
+
+function ObjectArrayCommand(params) {
+  this.params = new types.JavaObjectArray(params || []);
+}
+ObjectArrayCommand.$class = 'test.ObjectArrayCommand';
+ObjectArrayCommand.serialVersionUID = Long.fromString('2747429540516977995');
 
 describe('object_output_stream.test.js', function () {
   describe('writeObject(object)', function () {
@@ -166,13 +172,59 @@ describe('object_output_stream.test.js', function () {
       bytes.should.eql(javaBytes);
     });
 
-    it('should write NCommand java object', function () {
+    it('should write NCommand queryServerlist java object', function () {
       var byteStream = new ByteArrayOutputStream();
       var oos = new ObjectOutputStream(byteStream);
       var cmd = new NCommand('queryServerlist');
       oos.writeObject(cmd);
       var bytes = byteStream.toByteArray();
       var javaBytes = utils.bytes('object_queryServerlist_cmd');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+    });
+
+    it('should write ObjectArrayCommand java object', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new ObjectArrayCommand([
+        'com.alipay.cif.facade.UserService:1.0@XFIRE',
+        'SOFA'
+      ]);
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('object_array_cmd');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+    });
+
+    it('should write NCommand queryPublisherInfos java object', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new NCommand('queryPublisherInfos', [
+        'com.alipay.cif.facade.UserService:1.0@XFIRE',
+        'SOFA'
+      ]);
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('object_queryPublisherInfos_cmd');
       for (var i = 0; i < bytes.length; i++) {
         if (bytes[i] !== javaBytes[i]) {
           console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
