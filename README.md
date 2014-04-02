@@ -1,27 +1,27 @@
 outputstream
 =======
 
-[![Build Status](https://secure.travis-ci.org/node-modules/outputstream.png)](http://travis-ci.org/node-modules/outputstream) [![Dependency Status](https://gemnasium.com/fengmk2/object_output_stream.png)](https://gemnasium.com/fengmk2/outputstream)
+[![Build Status](https://secure.travis-ci.org/node-modules/java.io.png)](http://travis-ci.org/node-modules/java.io) [![Dependency Status](https://gemnasium.com/node-modules/java.io.png)](https://gemnasium.com/node-modules/java.io)
 
-[![NPM](https://nodei.co/npm/outputstream.png?downloads=true&stars=true)](https://nodei.co/npm/outputstream/)
+[![NPM](https://nodei.co/npm/java.io.png?downloads=true&stars=true)](https://nodei.co/npm/java.io/)
 
-![logo](https://raw.github.com/node-modules/outputstream/master/logo.png)
+![logo](https://raw.github.com/node-modules/java.io/master/logo.png)
 
-Java OutputStream utils.
+[java.io.*](http://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html) javascript implement.
 
 ## Install
 
 ```bash
-$ npm install outputstream
+$ npm install java.io
 ```
 
 ## Usage
 
 ```js
-var outputstream = require('outputstream');
+var io = require('java.io');
 
-var byteStream = new ByteArrayOutputStream();
-var oos = new ObjectOutputStream(byteStream);
+var byteStream = new io.ByteArrayOutputStream();
+var oos = new io.ObjectOutputStream(byteStream);
 oos.writeObject('foo');
 
 var bytes = byteStream.toByteArray();
@@ -40,19 +40,35 @@ Any `OutputStream` subclass must impl `_writeByte(byte)` and `_writeBytes(bytes)
 proto.write = function (b, off, len);
 ```
 
-## Class: `ObjectOutputStream`
+### Class: `ObjectOutputStream`
 
 TODO
 
-## Class: `ByteArrayOutputStream`
+### Class: `ByteArrayOutputStream`
 
 TODO
 
-## Class: `DataOutputStream`
+### Class: `DataOutputStream`
 
 TODO
 
-## Utlity: `Bits` and `types`
+## Class: `InputStream`
+
+TODO
+
+### Class: `ObjectInputStream`
+
+TODO
+
+### Class: `ByteArrayInputStream`
+
+TODO
+
+### Class: `DataInputStream`
+
+TODO
+
+## Utility: `Bits` and `types`
 
 ### `Bits`
 
@@ -66,6 +82,24 @@ Impl some Java Type:
 
 * `types.JavaString` => `java.lang.String`
 * `types.JavaObjectArray` => `Object[]`
+
+## TODO
+
+* [ ] OutputStream
+  * [√] ObjectOutputStream
+  * [√] DataOutputStream
+  * [√] BlockDataOutputStream
+  * [√] ByteArrayOutputStream
+* [ ] InputStream
+  * [ ] ObjectInputStream
+  * [ ] DataInputStream
+  * [ ] BlockDataInputStream
+  * [ ] ByteArrayInputStream
+* [ ] Utility
+  * [ ] Bits
+  * [ ] types
+    * [√] JavaString
+    * [√] JavaObjectArray
 
 ## License
 

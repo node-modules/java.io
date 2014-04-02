@@ -1,7 +1,7 @@
 {
-  "name": "outputstream",
+  "name": "java.io",
   "version": "0.0.0",
-  "description": "Java OutputStream",
+  "description": "java.io.* javascript implement",
   "main": "index.js",
   "scripts": {
     "test": "make test-all"
@@ -27,17 +27,20 @@
     "mocha": "*",
     "should": "3.2.0"
   },
-  "homepage": "https://github.com/node-modules/outputstream",
+  "homepage": "https://github.com/node-modules/java.io",
   "repository": {
     "type": "git",
-    "url": "git://github.com/node-modules/outputstream.git"
+    "url": "git://github.com/node-modules/java.io.git"
   },
   "bugs": {
-    "url": "https://github.com/node-modules/outputstream/issues",
+    "url": "https://github.com/node-modules/java.io/issues",
     "email": "fengmk2@gmail.com"
   },
   "keywords": [
-    "ObjectOutputStream", "OutputStream"
+    "ObjectOutputStream", "OutputStream",
+    "java.io",
+    "io",
+    "InputStream"
   ],
   "engines": {
     "node": ">= 0.10.0"
