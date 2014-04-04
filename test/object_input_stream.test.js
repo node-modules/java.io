@@ -77,6 +77,18 @@ describe('object_input_stream.test.js', function () {
       foo.should.eql([]);
     });
 
+    it.skip('read object as ArrayList<SimplePurePublisherInfo>', function () {
+      var is = new ByteArrayInputStream(utils.bytes('array_simplefinfo'));
+      var ois = new ObjectInputStream(is);
+      var foo = ois.readObject();
+      foo.should.eql([{
+        clientId: 'clientIdvalue',
+        hostId: '127.0.0.1:3333',
+        isClusterPublisher: false,
+        isPersistent: false,
+      }]);
+    });
+
     it.skip('read object as ArrayList<NPurePublisherInfo>', function () {
       var is = new ByteArrayInputStream(utils.bytes('array_list_object_multi'));
       var ois = new ObjectInputStream(is);
