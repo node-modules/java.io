@@ -15,7 +15,9 @@
  */
 
 var should = require('should');
+var Long = require('long');
 var Bits = require('../').Bits;
+var utils = require('./utils');
 
 describe('bits.test.js', function () {
   describe('putShort()', function () {
@@ -30,6 +32,25 @@ describe('bits.test.js', function () {
   describe('putInt()', function () {
     it('should put number to int bytes', function () {
       Bits.putInt(new Buffer(4), 0, 1024010).should.eql(new Buffer([0x00, 0x0f, 0xa0, 0x0a]));
+    });
+  });
+
+  describe('putLong()', function () {
+    it('should put 274742954051697799L', function () {
+      var bytes = new Buffer(8);
+      Bits.putLong(bytes, 0, Long.fromString('274742954051697799'));
+      var javaBytes = utils.bytes('long_274742954051697799');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
     });
   });
 });

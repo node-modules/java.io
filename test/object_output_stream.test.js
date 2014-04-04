@@ -18,15 +18,17 @@ var Long = require('long');
 var should = require('should');
 var ByteArrayOutputStream = require('../').ByteArrayOutputStream;
 var ObjectOutputStream = require('../').ObjectOutputStream;
+var ByteArrayInputStream = require('../').ByteArrayInputStream;
+var ObjectInputStream = require('../').ObjectInputStream;
 var utils = require('./utils');
 var types = require('../').types;
 
-function NTestCommand(name, params) {
+function NTestCommand(name, params, id) {
   this.isNewVersion = false;
-  this.id = new types.JavaString();
+  this.id = new types.JavaString(id);
   this.name = name;
   // [Ljava.lang.Object;: static final long serialVersionUID = -8012369246846506644L;
-  this.params = new types.JavaObjectArray(params || []);
+  this.params = new types.JavaObjectArray(params);
   // [Z isNewVersion, Ljava/lang/String; id, Ljava/lang/String; name, [Ljava/lang/Object; params]
 }
 
@@ -66,13 +68,53 @@ TwoStringCommand.$class = 'test.TwoStringCommand';
 TwoStringCommand.serialVersionUID = Long.fromString('2747429540516977994');
 
 function ObjectArrayCommand(params) {
-  this.params = new types.JavaObjectArray(params || []);
+  this.params = new types.JavaObjectArray(params);
 }
 ObjectArrayCommand.$class = 'test.ObjectArrayCommand';
 ObjectArrayCommand.serialVersionUID = Long.fromString('2747429540516977995');
 
 describe('object_output_stream.test.js', function () {
   describe('writeObject(object)', function () {
+    it('should write new Object[] as java write', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new types.JavaObjectArray([]);
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('object[]_empty');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+    });
+
+    it('should write new Object[foo, bar] as java write', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new types.JavaObjectArray(['foo', 'bar']);
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('object[foo,bar]');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+    });
+
     it('should write one false boolean simple java object', function () {
       var byteStream = new ByteArrayOutputStream();
       var oos = new ObjectOutputStream(byteStream);
@@ -175,7 +217,7 @@ describe('object_output_stream.test.js', function () {
     it('should write NTestCommand queryServerlist java object', function () {
       var byteStream = new ByteArrayOutputStream();
       var oos = new ObjectOutputStream(byteStream);
-      var cmd = new NTestCommand('queryServerlist');
+      var cmd = new NTestCommand('queryServerlist', []);
       oos.writeObject(cmd);
       var bytes = byteStream.toByteArray();
       var javaBytes = utils.bytes('object_queryServerlist_cmd');
@@ -236,6 +278,34 @@ describe('object_output_stream.test.js', function () {
       }
       bytes.should.length(javaBytes.length);
       bytes.should.eql(javaBytes);
+    });
+
+    it('should write NTestCommand queryPublisherInfos with id 1024 java object', function () {
+      var byteStream = new ByteArrayOutputStream();
+      var oos = new ObjectOutputStream(byteStream);
+      var cmd = new NTestCommand('queryPublisherInfos', [
+        'com.test.service:1.0@RPC',
+        'CHAIR'
+      ], "1024");
+      oos.writeObject(cmd);
+      var bytes = byteStream.toByteArray();
+      var javaBytes = utils.bytes('object_queryPublisherInfos_with_id_cmd');
+      for (var i = 0; i < bytes.length; i++) {
+        if (bytes[i] !== javaBytes[i]) {
+          console.log(i, bytes[i], javaBytes[i], bytes.length, javaBytes.length);
+          console.log('js  :', bytes, '\njava:', javaBytes);
+          console.log('js  :', bytes.toString(), '\njava:', javaBytes.toString());
+          break;
+        }
+        // bytes[i].should.equal(javaBytes[i]);
+      }
+      bytes.should.length(javaBytes.length);
+      bytes.should.eql(javaBytes);
+
+      // TODO: should read it
+      // var is = new ByteArrayInputStream(bytes);
+      // var ois = new ObjectInputStream(is);
+      // var foo = ois.readObject();
     });
   });
 

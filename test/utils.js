@@ -1,5 +1,5 @@
 /**!
- * object_output_stream - test/utils.js
+ * java.io - test/utils.js
  *
  * Copyright(c) fengmk2 and other contributors.
  * MIT Licensed
