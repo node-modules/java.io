@@ -8,7 +8,7 @@
   },
   "config": {
     "cov": {
-      "threshold": 70
+      "threshold": 65
     }
   },
   "dependencies": {
