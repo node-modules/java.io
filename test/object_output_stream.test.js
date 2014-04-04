@@ -21,7 +21,7 @@ var ObjectOutputStream = require('../').ObjectOutputStream;
 var utils = require('./utils');
 var types = require('../').types;
 
-function NCommand(name, params) {
+function NTestCommand(name, params) {
   this.isNewVersion = false;
   this.id = new types.JavaString();
   this.name = name;
@@ -30,11 +30,11 @@ function NCommand(name, params) {
   // [Z isNewVersion, Ljava/lang/String; id, Ljava/lang/String; name, [Ljava/lang/Object; params]
 }
 
-NCommand.$class = 'com.alipay.config.common.dataobject.NCommand';
-NCommand.serialVersionUID = Long.fromString('274742954051697799');
+NTestCommand.$class = 'test.NTestCommand';
+NTestCommand.serialVersionUID = Long.fromString('574742954051697799');
 
-NCommand.prototype.toString = function () {
-  var s = '{ NCommand: name=' + this.name;
+NTestCommand.prototype.toString = function () {
+  var s = '{ NTestCommand: name=' + this.name;
   if (this.params && this.params.length > 0) {
     s += ', params=[';
     for (var i = 0; i < this.params.length; i++) {
@@ -172,10 +172,10 @@ describe('object_output_stream.test.js', function () {
       bytes.should.eql(javaBytes);
     });
 
-    it('should write NCommand queryServerlist java object', function () {
+    it('should write NTestCommand queryServerlist java object', function () {
       var byteStream = new ByteArrayOutputStream();
       var oos = new ObjectOutputStream(byteStream);
-      var cmd = new NCommand('queryServerlist');
+      var cmd = new NTestCommand('queryServerlist');
       oos.writeObject(cmd);
       var bytes = byteStream.toByteArray();
       var javaBytes = utils.bytes('object_queryServerlist_cmd');
@@ -196,8 +196,8 @@ describe('object_output_stream.test.js', function () {
       var byteStream = new ByteArrayOutputStream();
       var oos = new ObjectOutputStream(byteStream);
       var cmd = new ObjectArrayCommand([
-        'com.alipay.cif.facade.UserService:1.0@XFIRE',
-        'SOFA'
+        'com.test.service:1.0@RPC',
+        'CHAIR'
       ]);
       oos.writeObject(cmd);
       var bytes = byteStream.toByteArray();
@@ -215,12 +215,12 @@ describe('object_output_stream.test.js', function () {
       bytes.should.eql(javaBytes);
     });
 
-    it('should write NCommand queryPublisherInfos java object', function () {
+    it('should write NTestCommand queryPublisherInfos java object', function () {
       var byteStream = new ByteArrayOutputStream();
       var oos = new ObjectOutputStream(byteStream);
-      var cmd = new NCommand('queryPublisherInfos', [
-        'com.alipay.cif.facade.UserService:1.0@XFIRE',
-        'SOFA'
+      var cmd = new NTestCommand('queryPublisherInfos', [
+        'com.test.service:1.0@RPC',
+        'CHAIR'
       ]);
       oos.writeObject(cmd);
       var bytes = byteStream.toByteArray();
