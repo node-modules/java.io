@@ -77,6 +77,17 @@ describe('object_input_stream.test.js', function () {
       foo.should.eql([]);
     });
 
+    it('read TestSerial object', function () {
+      // http://www.javaworld.com/article/2072752/the-java-serialization-algorithm-revealed.html
+      var is = new ByteArrayInputStream(utils.bytes('TestSerial'));
+      var ois = new ObjectInputStream(is);
+      var foo = ois.readObject();
+      foo.should.eql({
+        version: 66,
+        con: { containVersion: 11 }
+      });
+    });
+
     it.skip('read object as ArrayList<SimplePurePublisherInfo>', function () {
       var is = new ByteArrayInputStream(utils.bytes('array_simplefinfo'));
       var ois = new ObjectInputStream(is);
