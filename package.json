@@ -1,7 +1,7 @@
 {
   "name": "java.io",
   "version": "0.0.1",
-  "description": "java.io.* javascript implement",
+  "description": "Object Serialization Stream Protocol javascript implement",
   "main": "index.js",
   "scripts": {
     "test": "make test-all"
@@ -38,6 +38,7 @@
   },
   "keywords": [
     "ObjectOutputStream", "OutputStream",
+    "Serialization",
     "java.io",
     "io",
     "InputStream"

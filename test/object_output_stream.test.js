@@ -73,7 +73,7 @@ function ObjectArrayCommand(params) {
 ObjectArrayCommand.$class = 'test.ObjectArrayCommand';
 ObjectArrayCommand.serialVersionUID = Long.fromString('2747429540516977995');
 
-describe('object_output_stream.test.js', function () {
+describe.skip('object_output_stream.test.js', function () {
   describe('writeObject(object)', function () {
     it('should write new Object[] as java write', function () {
       var byteStream = new ByteArrayOutputStream();

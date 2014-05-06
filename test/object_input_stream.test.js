@@ -19,7 +19,7 @@ var utils = require('./utils');
 var ByteArrayInputStream = require('../').ByteArrayInputStream;
 var ObjectInputStream = require('../').ObjectInputStream;
 
-describe('object_input_stream.test.js', function () {
+describe.skip('object_input_stream.test.js', function () {
   describe('readObject()', function () {
     it('read object as ascii string', function () {
       var is = new ByteArrayInputStream(utils.bytes('string_foo'));
@@ -77,7 +77,7 @@ describe('object_input_stream.test.js', function () {
       foo.should.eql([]);
     });
 
-    it('read TestSerial object', function () {
+    it.skip('read TestSerial object', function () {
       // http://www.javaworld.com/article/2072752/the-java-serialization-algorithm-revealed.html
       var is = new ByteArrayInputStream(utils.bytes('TestSerial'));
       var ois = new ObjectInputStream(is);

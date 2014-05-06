@@ -17,7 +17,7 @@
 var should = require('should');
 var BlockDataOutputStream = require('../').BlockDataOutputStream;
 
-describe('block_data_output_stream.test.js', function () {
+describe.skip('block_data_output_stream.test.js', function () {
   describe('getUTFLength()', function () {
     it('should get string utf length', function () {
       var bs = new BlockDataOutputStream();

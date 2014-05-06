@@ -18,7 +18,124 @@ var should = require('should');
 var utils = require('../../utils');
 var ObjectInputStream = require('../../../lib/serialization/v2/input');
 
-describe.only('serialization/v2/input.test.js', function () {
+describe('serialization/v2/input.test.js', function () {
+  describe('read()', function () {
+    it('should call read() twice work', function () {
+      var ois = new ObjectInputStream(utils.bytes('array/[int'));
+      ois.read().should.eql([0, 1, 2, 3]);
+      should.ok(ois.read() === undefined);
+    });
+  });
+
+  describe('Enum', function () {
+    it('should read enum', function () {
+      ObjectInputStream.read(utils.bytes('enum/WeekDayEnum')).should.eql({
+        name: 'Mon'
+      });
+      ObjectInputStream.read(utils.bytes('enum/WeekDayEnum'), true).should.eql({
+        '$class': {
+          name: 'javaio.test.WeekDayEnum',
+          serialVersionUID: '0',
+          flags: 18,
+          fields: [],
+          superClass:
+            { name: 'java.lang.Enum',
+              serialVersionUID: '0',
+              flags: 18,
+              fields: [],
+              superClass: null } },
+        '$': { name: 'Mon' }
+      });
+      ObjectInputStream.read(utils.bytes('enum/WeekDayEnum_Thu')).should.eql({
+        name: 'Thu'
+      });
+      ObjectInputStream.read(utils.bytes('enum/WeekDayEnum_Mon')).should.eql({
+        name: 'Mon'
+      });
+      ObjectInputStream.read(utils.bytes('enum/WeekDayEnum_Sat')).should.eql({
+        name: 'Sat'
+      });
+      ObjectInputStream.read(utils.bytes('enum/WeekDayEnum_Sun')).should.eql({
+        name: 'Sun'
+      });
+    });
+  });
+
+  describe('Array', function () {
+    it('should read Primitive value list', function () {
+      ObjectInputStream.read(utils.bytes('array/[int')).should.eql([0, 1, 2, 3]);
+      ObjectInputStream.read(utils.bytes('array/[byte')).should.eql([0, 1, 2, 3]);
+      ObjectInputStream.read(utils.bytes('array/[char')).should.eql([97, 98, 99, 100]);
+      ObjectInputStream.read(utils.bytes('array/[float'))
+        .should.eql([0, 1.100000023841858, 2.200000047683716, 3.3333001136779785]);
+      ObjectInputStream.read(utils.bytes('array/[double')).should.eql([0, 1.1, 2.2, 3.3333]);
+      ObjectInputStream.read(utils.bytes('array/[String')).should.eql(["a", "bbb", "cccc", "ddd中文"]);
+      ObjectInputStream.read(utils.bytes('array/[boolean')).should.eql([true, false, false, false]);
+    });
+
+    it('should read ArrayList', function () {
+      // ArrayList objs
+      ObjectInputStream.read(utils.bytes('array/objs')).should.eql([1, null, 1024.1]);
+      // ArrayList<String>
+      ObjectInputStream.read(utils.bytes('array/strs')).should.eql(['a1', 'a2', 'a3']);
+    });
+
+    it('should read Object list', function () {
+      // new SerialTest[]
+      ObjectInputStream.read(utils.bytes('array/[SerialTest')).should.eql([
+        { parentVersion: 10, version: 66, con: { containVersion: 11 } },
+        { parentVersion: 10, version: 66, con: { containVersion: 11 } },
+        { parentVersion: 10, version: 66, con: { containVersion: 11 } },
+      ]);
+
+      // ArrayList<SerialTest>
+      ObjectInputStream.read(utils.bytes('array/SerialTest_list')).should.eql([
+        { parentVersion: 10, version: 66, con: { containVersion: 11 } },
+        { parentVersion: 10, version: 66, con: { containVersion: 11 } },
+        { parentVersion: 10, version: 66, con: { containVersion: 11 } },
+      ]);
+    });
+
+    it('read object as ArrayList<SimplePurePublisherInfo>', function () {
+      var obj = ObjectInputStream.read(utils.bytes('array_simplefinfo'));
+      should.exist(obj);
+      obj.should.eql([{
+        clientId: 'clientIdvalue',
+        hostId: '127.0.0.1:3333',
+        isClusterPublisher: false,
+        isPersistent: false,
+      }]);
+    });
+  });
+
+  describe('Map', function () {
+    it('should read Primitive value map', function () {
+      ObjectInputStream.read(utils.bytes('map/int'))
+        .should.eql({ '0': 0, '1': 1, '2': 2 });
+      ObjectInputStream.read(utils.bytes('map/int2'))
+        .should.eql({ '0': 0, '1': 1, '2': 2 });
+      ObjectInputStream.read(utils.bytes('map/byte'))
+        .should.eql({ '0': 0, '1': 1, '2': 2 });
+      ObjectInputStream.read(utils.bytes('map/char'))
+        .should.eql({ '0': 0, '1': 1, '2': 2 });
+      ObjectInputStream.read(utils.bytes('map/double'))
+        .should.eql({ '0': 0, '1': 1.1, '2': 2.2222 });
+      ObjectInputStream.read(utils.bytes('map/boolean'))
+        .should.eql({ 'true': true, 'false': false });
+      ObjectInputStream.read(utils.bytes('map/objs'))
+        .should.eql({
+          'int': 1,
+          'double': 1.1,
+          'float': 2.200000047683716,
+          'String': 'int',
+          'boolean': true,
+          'booleanf': false,
+          'byte': 1,
+          'char': 22
+        });
+    });
+  });
+
   describe('Primitive Value', function () {
     it('read byte', function () {
       ObjectInputStream.read(utils.bytes('byte/0xff')).should.equal(-1);
@@ -66,6 +183,7 @@ describe.only('serialization/v2/input.test.js', function () {
     });
 
     it('read int', function () {
+      ObjectInputStream.read(utils.bytes('int/Integer1')).should.equal(1);
       ObjectInputStream.read(utils.bytes('int/0')).should.equal(0);
       ObjectInputStream.read(utils.bytes('int/1')).should.equal(1);
       ObjectInputStream.read(utils.bytes('int/2')).should.equal(2);
@@ -146,12 +264,33 @@ describe.only('serialization/v2/input.test.js', function () {
     it('read null', function () {
       should.ok(ObjectInputStream.read(utils.bytes('null')) === null);
     });
+
+    it('read String', function () {
+      ObjectInputStream.read(utils.bytes('String/empty')).should.equal('');
+      ObjectInputStream.read(utils.bytes('String/foo')).should.equal('foo');
+      ObjectInputStream.read(utils.bytes('String/nonascii')).should.equal('foo 还有中文');
+      var large65535 = '';
+      for (var i = 0; i < 65535; i++) {
+        large65535 += 'a';
+      }
+      ObjectInputStream.read(utils.bytes('String/65535')).should.equal(large65535);
+      var large65536 = '';
+      for (var i = 0; i < 65536; i++) {
+        large65536 += 'a';
+      }
+      ObjectInputStream.read(utils.bytes('String/65536')).should.equal(large65536);
+      var large65535 = '';
+      for (var i = 0; i < 65535; i++) {
+        large65535 += '中';
+      }
+      ObjectInputStream.read(utils.bytes('String/65535_nonascii')).should.equal(large65535);
+    });
   });
 
   describe('Simple Object', function () {
     it('read SerialTestRef object withType = false', function () {
       var ois = new ObjectInputStream(utils.bytes('SerialTestRef'));
-      var foo = ois.readObject();
+      var foo = ois.read();
       foo.should.eql({
         a: 'a', c: 'a'
       });
@@ -159,7 +298,7 @@ describe.only('serialization/v2/input.test.js', function () {
 
     it('read SerialTestValues object withType = false', function () {
       var ois = new ObjectInputStream(utils.bytes('SerialTestValues'));
-      var foo = ois.readObject();
+      var foo = ois.read();
       foo.should.eql({
         version: 66,
         b: -1,
@@ -175,7 +314,7 @@ describe.only('serialization/v2/input.test.js', function () {
 
     it('read SerialTest2 object withType = false', function () {
       var ois = new ObjectInputStream(utils.bytes('SerialTest2'));
-      var foo = ois.readObject();
+      var foo = ois.read();
       foo.should.eql({
         parentVersion: 10,
         nodeVersion: '0.11.12',
@@ -198,7 +337,7 @@ describe.only('serialization/v2/input.test.js', function () {
     it('read SerialTest object withType = false', function () {
       // http://www.javaworld.com/article/2072752/the-java-serialization-algorithm-revealed.html
       var ois = new ObjectInputStream(utils.bytes('SerialTest'));
-      var foo = ois.readObject();
+      var foo = ois.read();
       foo.should.eql({
         parentVersion: 10,
         version: 66,
@@ -207,8 +346,8 @@ describe.only('serialization/v2/input.test.js', function () {
     });
 
     it('read SerialTest object withType = true', function () {
-      var ois = new ObjectInputStream(utils.bytes('SerialTest'));
-      var foo = ois.readObject(true);
+      var ois = new ObjectInputStream(utils.bytes('SerialTest'), true);
+      var foo = ois.read();
       foo.should.eql({
         '$class':
         { name: 'serialize.SerialTest',
@@ -241,6 +380,43 @@ describe.only('serialization/v2/input.test.js', function () {
             '$fields': [ { type: 'I', name: 'containVersion' } ],
             '$serialVersionUID': '',
             '$': { containVersion: 11 } } }
+      });
+    });
+
+    it('should read PureClientInfo', function () {
+      var info = ObjectInputStream.read(utils.bytes('object/PureClientInfo'));
+      info.should.eql({
+        isValid: true,
+        clientId: 'some-clientId',
+        dataId: 'some-dataId',
+        groups: [ 'SOFA-GROUP', 'HSF' ],
+        hostId: '127.0.0.1',
+        serverIP: '127.0.0.2'
+      });
+    });
+
+    it('should read PurePublisherInfo', function () {
+      var info = ObjectInputStream.read(utils.bytes('object/PurePublisherInfo'));
+      info.should.eql({
+        isValid: true,
+        clientId: 'some-clientId',
+        dataId: 'some-dataId',
+        groups: [ 'SOFA-GROUP', 'HSF' ],
+        hostId: '127.0.0.1',
+        serverIP: '127.0.0.2',
+        isClusterPublisher: true,
+        isPersistent: true,
+        data: [
+          {
+            isValid: true,
+            clientId: 'some-clientId',
+            dataId: 'some-dataId',
+            groups: [ 'SOFA-GROUP', 'HSF' ],
+            hostId: '127.0.0.1',
+            serverIP: '127.0.0.2'
+          }
+        ],
+        datumId: 'some-datumId'
       });
     });
   });

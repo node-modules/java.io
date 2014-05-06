@@ -1,13 +1,17 @@
-outputstream
+java.io
 =======
 
-[![Build Status](https://secure.travis-ci.org/node-modules/java.io.png)](http://travis-ci.org/node-modules/java.io) [![Dependency Status](https://gemnasium.com/node-modules/java.io.png)](https://gemnasium.com/node-modules/java.io)
+[![Build Status](https://secure.travis-ci.org/node-modules/java.io.png)](http://travis-ci.org/node-modules/java.io)
+
+[![Dependency Status](https://gemnasium.com/node-modules/java.io.png)](https://gemnasium.com/node-modules/java.io)
 
 [![NPM](https://nodei.co/npm/java.io.png?downloads=true&stars=true)](https://nodei.co/npm/java.io/)
 
 ![logo](https://raw.github.com/node-modules/java.io/master/logo.png)
 
-[java.io.*](http://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html) javascript implement.
+[Object Serialization Stream Protocol](http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html) javascript implement.
+
+* [Object Serialization Stream Protocol Mind Node](https://www.dropbox.com/s/chqbm91wl5wx2oa/Object%20Serialization%20Stream%20Protocol.pdf)
 
 ## Install
 
@@ -20,64 +24,10 @@ $ npm install java.io
 ```js
 var io = require('java.io');
 
-var byteStream = new io.ByteArrayOutputStream();
-var oos = new io.ObjectOutputStream(byteStream);
-oos.writeObject('foo');
+var bytes = io.writeObject('foo');
 
-var bytes = byteStream.toByteArray();
+var obj = io.readObject(bytes);
 ```
-
-## Class: `OutputStream`
-
-Any `OutputStream` subclass must impl `_writeByte(byte)` and `_writeBytes(bytes)`.
-
-### Function: `write(b, off, len)`
-
-```js
-// write(100)
-// write(new Buffer('foo'))
-// write(new Buffer('foobar'), 0, 3);
-proto.write = function (b, off, len);
-```
-
-### Class: `ObjectOutputStream`
-
-TODO
-
-### Class: `ByteArrayOutputStream`
-
-TODO
-
-### Class: `DataOutputStream`
-
-TODO
-
-## Class: `InputStream`
-
-Any `InputStream` subclass must impl `_readByte()` and `_readBytes(buf, off, len)`.
-
-### Function: `read(buf, off, len)`
-
-* @return {Number} readed bytes size when `buf` given, otherwise return read `byte`.
-
-```js
-// read()
-// read(b)
-// read(0, 100)
-proto.read = function (b, off, len);
-```
-
-### Class: `ObjectInputStream`
-
-TODO
-
-### Class: `ByteArrayInputStream`
-
-TODO
-
-### Class: `DataInputStream`
-
-TODO
 
 ## Utility: `Bits` and `types`
 
@@ -96,15 +46,8 @@ Impl some Java Type:
 
 ## TODO
 
-* [ ] OutputStream
-  * [√] ObjectOutputStream
-  * [√] DataOutputStream
-  * [√] BlockDataOutputStream
-  * [√] ByteArrayOutputStream
-* [ ] InputStream
-  * [ ] ObjectInputStream
-  * [ ] DataInputStream
-  * [ ] ByteArrayInputStream
+* [x] read(bytes, withType)
+* [ ] write(obj, withType)
 * [ ] Utility
   * [ ] Bits
   * [ ] types
