@@ -8,6 +8,12 @@
  *   苏千 <suqian.yf@alipay.com> (http://fengmk2.github.com)
  */
 
+/*
+console.log(require('util').inspect(
+  ObjectInputStream.read(utils.bytes('boolean/true'), true),
+  {depth: null}))
+*/
+
 'use strict';
 
 /**
@@ -22,7 +28,7 @@ describe('serialization/v2/input.test.js', function () {
   describe('read()', function () {
     it('should call read() twice work', function () {
       var ois = new ObjectInputStream(utils.bytes('array/[int'));
-      ois.read().should.eql([0, 1, 2, 3]);
+      ois.read(true).should.eql([0, 1, 2, 3]);
       should.ok(ois.read() === undefined);
     });
   });
@@ -88,12 +94,15 @@ describe('serialization/v2/input.test.js', function () {
         { parentVersion: 10, version: 66, con: { containVersion: 11 } },
       ]);
 
+
       // ArrayList<SerialTest>
       ObjectInputStream.read(utils.bytes('array/SerialTest_list')).should.eql([
         { parentVersion: 10, version: 66, con: { containVersion: 11 } },
         { parentVersion: 10, version: 66, con: { containVersion: 11 } },
         { parentVersion: 10, version: 66, con: { containVersion: 11 } },
       ]);
+
+
     });
 
     it('read object as ArrayList<SimplePurePublisherInfo>', function () {
@@ -109,11 +118,11 @@ describe('serialization/v2/input.test.js', function () {
   });
 
   describe('Map', function () {
-    it('should read Primitive value map', function () {
+    it.only('should read Primitive value map', function () {
       ObjectInputStream.read(utils.bytes('map/int'))
         .should.eql({ '0': 0, '1': 1, '2': 2 });
       ObjectInputStream.read(utils.bytes('map/int2'))
-        .should.eql({ '0': 0, '1': 1, '2': 2 });
+        .should.eql({ '0': { 'value': 0 }, '1': { 'value': 1 }, '2': { 'value': 2 } });
       ObjectInputStream.read(utils.bytes('map/byte'))
         .should.eql({ '0': 0, '1': 1, '2': 2 });
       ObjectInputStream.read(utils.bytes('map/char'))
