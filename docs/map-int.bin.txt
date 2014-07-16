@@ -1,0 +1,98 @@
+0000000 ac ed
+        00 05
+        73                         TC_OBJECT
+        72                         TC_CLASSDESC
+        00 11                      length
+        6a 61 76 61 2e 75 74 69    "java.util.HashMap"
+0000010 6c 2e 48 61 73 68 4d 61
+        70
+        05 07 da c1 c3 16 60       serialVersionUID
+0000020 d1
+        03                         classDescFlags
+        00 02                      fields count
+        46                         F // float
+        00 0a                      length
+        6c                         "loadFactor"
+        6f 61 64 46 61 63 74 6f
+0000030 72
+        49                         I // integer
+        00 09                      length
+        74 68 72 65                "threshold"
+        73 68 6f 6c 64
+        78                         classAnnotation: TC_ENDBLOCKDATA
+        70                         superclass is TC_NULL
+
+                                   classdata: wrclass objectAnnotation
+        3f                         value of loadFactor
+0000040 40 00 00
+        00 00 00 0c                value of threshold
+
+
+                                   objectAnnotation: contents endBlockData
+                                   content: blockdata
+                                   blockdata: blockdatashort
+        77                         TC_BLOCKDATA
+        08                         (unsigned byte)<size>
+        00 00 00 10                (byte)[size]
+        00 00 00                   ??? array length ???
+0000050 03
+        74                         TC_STRING
+        00 01                      length
+        32                         "2"
+        73                         TC_OBJECT
+        72                         TC_CLASSDESC
+        00 11                      length
+        6a 61 76 61 2e 6c 61       "java.lang.Integer"
+0000060 6e 67 2e 49 6e 74 65 67
+        65 72
+        12 e2 a0 a4 f7 81          serialVersionUID
+0000070 87 38
+        02                         classDescFlags
+        00 01                      fields count
+        49                         I // Integer
+        00 05                      length
+        76 61 6c 75 65             "value"
+        78                         classAnnotation: TC_ENDBLOCKDATA
+        72                         TC_CLASSDESC // superClass
+        00                         length
+0000080 10
+        6a 61 76 61 2e 6c 61 6e    "java.lang.Number"
+        67 2e 4e 75 6d 62 65
+0000090 72
+        86 ac 95 1d 0b 94 e0 8b    serialVersionUID
+        02                         classDescFlags
+        00 00                      fields count
+        78                         classAnnotation: TC_ENDBLOCKDATA
+        70                         superclass is TC_NULL
+        00 00                      value of "value"
+00000a0 00 02
+        74                         TC_STRING
+        00 01                      length
+        31                         "1"
+        73                         TC_OBJECT
+        71                         TC_REFERENCE
+        00 7e 00 03                reference index
+        00 00 00 01                value of "value"
+00000b0 74
+        00 01
+        30
+        73
+        71
+        00 7e 00 03
+        00 00 00 00
+        78                        classAnnotation: TC_ENDBLOCKDATA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
