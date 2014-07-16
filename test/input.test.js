@@ -35,12 +35,9 @@ describe('input.test.js', function () {
 
   describe('Enum', function () {
     it('should read enum', function () {
-      ObjectInputStream.read(utils.bytes('enum/WeekDayEnum_Mon')).should.eql({
-        name: 'Mon'
-      });
       ObjectInputStream.read(utils.bytes('enum/WeekDayEnum_Mon'), true).should.eql({
         '$class': {
-          name: 'javaio.test.WeekDayEnum',
+          name: 'test.WeekDayEnum',
           serialVersionUID: '0',
           flags: 18,
           fields: [],
@@ -145,7 +142,7 @@ describe('input.test.js', function () {
     });
   });
 
-  describe.only('Primitive Value', function () {
+  describe('Primitive Value', function () {
     it('read byte', function () {
       ObjectInputStream.read(utils.bytes('byte/0xff')).should.equal(-1);
       ObjectInputStream.read(utils.bytes('byte/0x00')).should.equal(0x00);
