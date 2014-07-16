@@ -14,14 +14,4 @@
  * Module dependencies.
  */
 
-// Utility
-exports.Bits = require('./lib/bits');
-exports.types = require('./lib/types');
-
-exports.Constants = require('./lib/const');
-
-var serialization = require('./lib/serialization/v2');
-
-exports.writeObject = exports.write = serialization.writeObject;
-exports.readObject = exports.read = serialization.readObject;
-exports.addObject = serialization.addObject;
+module.exports = require('./lib/')
