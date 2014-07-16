@@ -67,7 +67,7 @@ describe('input.test.js', function () {
     });
   });
 
-  describe.only('Array', function () {
+  describe('Array', function () {
     it('should read Primitive value list', function () {
       ObjectInputStream.read(utils.bytes('array/[int')).should.eql([0, 1, 2, 3]);
       ObjectInputStream.read(utils.bytes('array/[byte')).should.eql([0, 1, 2, 3]);
@@ -145,7 +145,7 @@ describe('input.test.js', function () {
     });
   });
 
-  describe('Primitive Value', function () {
+  describe.only('Primitive Value', function () {
     it('read byte', function () {
       ObjectInputStream.read(utils.bytes('byte/0xff')).should.equal(-1);
       ObjectInputStream.read(utils.bytes('byte/0x00')).should.equal(0x00);
@@ -192,7 +192,7 @@ describe('input.test.js', function () {
     });
 
     it('read int', function () {
-      ObjectInputStream.read(utils.bytes('int/Integer1')).should.equal(1);
+      ObjectInputStream.read(utils.bytes('int/2-obj')).should.equal(2);
       ObjectInputStream.read(utils.bytes('int/0')).should.equal(0);
       ObjectInputStream.read(utils.bytes('int/1')).should.equal(1);
       ObjectInputStream.read(utils.bytes('int/2')).should.equal(2);
