@@ -119,7 +119,7 @@ describe('input.test.js', function () {
       ObjectInputStream.read(utils.bytes('map/int'))
         .should.eql({ '0': 0, '1': 1, '2': 2 });
       ObjectInputStream.read(utils.bytes('map/int2'))
-        .should.eql({ '0': { 'value': 0 }, '1': { 'value': 1 }, '2': { 'value': 2 } });
+        .should.eql({ '0': 0, '1': 1, '2': 2 });
       ObjectInputStream.read(utils.bytes('map/byte'))
         .should.eql({ '0': 0, '1': 1, '2': 2 });
       ObjectInputStream.read(utils.bytes('map/char'))
@@ -356,35 +356,33 @@ describe('input.test.js', function () {
       var foo = ois.read();
       foo.should.eql({
         '$class':
-        { name: 'serialize.SerialTest',
+        { name: 'test.SerialTest',
           serialVersionUID: '-444444444555555555',
           flags: 2,
           fields:
           [ { type: 'I', name: 'version' },
-            { type: 'L', name: 'con', classname: 'Lserialize/contain;' } ],
+            { type: 'L', name: 'con', classname: 'Ltest/contain;' } ],
           superClass:
-          { name: 'serialize.parent',
-            serialVersionUID: '-8061904837446484456',
+          { name: 'test.parent',
+            serialVersionUID: '-8467818262607962318',
             flags: 2,
             fields: [ { type: 'I', name: 'parentVersion' } ],
             superClass: null } },
           '$fields':
           [ { type: 'I', name: 'parentVersion' },
             { type: 'I', name: 'version' },
-            { type: 'L', name: 'con', classname: 'Lserialize/contain;' } ],
-          '$serialVersionUID': '',
+            { type: 'L', name: 'con', classname: 'Ltest/contain;' } ],
           '$':
           { parentVersion: 10,
             version: 66,
             con:
             { '$class':
-             { name: 'serialize.contain',
-               serialVersionUID: '5810625705047124443',
+             { name: 'test.contain',
+               serialVersionUID: '-3912185246934782049',
                flags: 2,
                fields: [ { type: 'I', name: 'containVersion' } ],
                superClass: null },
             '$fields': [ { type: 'I', name: 'containVersion' } ],
-            '$serialVersionUID': '',
             '$': { containVersion: 11 } } }
       });
     });
