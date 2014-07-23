@@ -89,7 +89,7 @@ describe('output.test.js', function () {
 
   describe('Primitive Value', function () {
 
-    it.only('write int', function(){
+    it('write int', function(){
       var byte_0xff = {
         '$': { value: -1 },
         '$class': {
@@ -108,6 +108,18 @@ describe('output.test.js', function () {
         '$fields': [ { type: 'B', name: 'value' } ]
       }
       OutputStream.write(byte_0xff).should.eql(utils.bytes('byte/0xff'));
+    });
+
+    it.only('write char', function() {
+      var char_0xff = { '$': { value: 255 },
+        '$class':
+         { name: 'java.lang.Character',
+           serialVersionUID: '3786198910865385080',
+           flags: 2,
+           fields: [ { type: 'C', name: 'value' } ],
+           superClass: null },
+        '$fields': [ { type: 'C', name: 'value' } ] };
+      OutputStream.write(char_0xff).should.eql(utils.bytes('char/0xff'));
     });
 
     it('write null', function () {
