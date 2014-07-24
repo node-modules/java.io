@@ -43,6 +43,30 @@ describe('output.test.js', function () {
       OutputStream.write(utils.obj('char/0xff')).should.eql(utils.bytes('char/0xff'));
     });
 
+    it('write double', function() {
+      OutputStream.write(utils.obj('double/0')).should.eql(utils.bytes('double/0'));
+    });
+
+    it('write float', function() {
+      OutputStream.write(utils.obj('float/0')).should.eql(utils.bytes('float/0'));
+    });
+
+    it('write int', function() {
+      OutputStream.write(utils.obj('int/1024')).should.eql(utils.bytes('int/1024'));
+    });
+
+    it('write long', function() {
+      OutputStream.write(utils.obj('long/-12345678')).should.eql(utils.bytes('long/-12345678'));
+    });
+
+    it('write short', function() {
+      OutputStream.write(utils.obj('short/0')).should.eql(utils.bytes('short/0'));
+    });
+
+    it('write boolean', function() {
+      OutputStream.write(utils.obj('boolean/true')).should.eql(utils.bytes('boolean/true'));
+    });
+
     it('write null', function () {
       OutputStream.write(null).should.eql(new Buffer([0xac, 0xed, 0x00, 0x05, 0x70]));
     });
