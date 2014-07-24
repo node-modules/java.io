@@ -22,7 +22,7 @@ console.log(require('util').inspect(
 
 var should = require('should');
 var utils = require('./utils');
-var ObjectInputStream = require('../lib//input');
+var ObjectInputStream = require('../lib/input');
 
 describe('input.test.js', function () {
   describe('read()', function () {
