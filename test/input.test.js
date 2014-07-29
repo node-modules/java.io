@@ -24,7 +24,7 @@ var should = require('should');
 var utils = require('./utils');
 var ObjectInputStream = require('../lib/input');
 
-describe.only('input.test.js', function () {
+describe('input.test.js', function () {
   describe('read()', function () {
     it('should call read() twice work', function () {
       var ois = new ObjectInputStream(utils.bytes('array/[int'));
