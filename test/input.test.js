@@ -24,7 +24,7 @@ var should = require('should');
 var utils = require('./utils');
 var ObjectInputStream = require('../lib/input');
 
-describe('input.test.js', function () {
+describe.only('input.test.js', function () {
   describe('read()', function () {
     it('should call read() twice work', function () {
       var ois = new ObjectInputStream(utils.bytes('array/[int'));
@@ -368,10 +368,6 @@ describe('input.test.js', function () {
             flags: 2,
             fields: [ { type: 'I', name: 'parentVersion' } ],
             superClass: null } },
-          '$fields':
-          [ { type: 'I', name: 'parentVersion' },
-            { type: 'I', name: 'version' },
-            { type: 'L', name: 'con', classname: 'Ltest/contain;' } ],
           '$':
           { parentVersion: 10,
             version: 66,
@@ -382,7 +378,6 @@ describe('input.test.js', function () {
                flags: 2,
                fields: [ { type: 'I', name: 'containVersion' } ],
                superClass: null },
-            '$fields': [ { type: 'I', name: 'containVersion' } ],
             '$': { containVersion: 11 } } }
       });
     });

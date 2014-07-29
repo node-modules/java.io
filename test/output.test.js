@@ -33,7 +33,7 @@ describe('output.test.js', function () {
       OutputStream.write(utils.obj('array/[char')).getBuffer().should.eql(utils.bytes('array/[char'));
     });
 
-    it.only('write ArrayList', function () {
+    it('write ArrayList', function () {
       /*
       var wstream = fs.createWriteStream(path.join(__dirname, 'fout.bin'));
       wstream.write(OutputStream.write(utils.obj('array/objs')).getBuffer());
