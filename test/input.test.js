@@ -26,7 +26,7 @@ var ObjectInputStream = require('../lib/input');
 
 describe('input.test.js', function () {
   describe('read()', function () {
-    it('should call read() twice work', function () {
+    it('call read() twice work', function () {
       var ois = new ObjectInputStream(utils.bytes('array/[int'));
       ois.read(true).should.eql([0, 1, 2, 3]);
       should.ok(ois.read() === undefined);
@@ -34,7 +34,7 @@ describe('input.test.js', function () {
   });
 
   describe('Enum', function () {
-    it('should read enum', function () {
+    it('read enum', function () {
       ObjectInputStream.read(utils.bytes('enum/WeekDayEnum_Mon'), true).should.eql({
         '$class': {
           name: 'test.WeekDayEnum',
@@ -65,7 +65,7 @@ describe('input.test.js', function () {
   });
 
   describe('Array', function () {
-    it('should read Primitive value list', function () {
+    it('read Primitive value list', function () {
       ObjectInputStream.read(utils.bytes('array/[int')).should.eql([0, 1, 2, 3]);
       ObjectInputStream.read(utils.bytes('array/[byte')).should.eql([0, 1, 2, 3]);
       ObjectInputStream.read(utils.bytes('array/[char')).should.eql([97, 98, 99, 100]);
@@ -76,14 +76,14 @@ describe('input.test.js', function () {
       ObjectInputStream.read(utils.bytes('array/[boolean')).should.eql([true, false, false, false]);
     });
 
-    it('should read ArrayList', function () {
+    it('read ArrayList', function () {
       // ArrayList objs
       ObjectInputStream.read(utils.bytes('array/objs')).should.eql([1, null, 1024.1]);
       // ArrayList<String>
       ObjectInputStream.read(utils.bytes('array/strs')).should.eql(['a1', 'a2', 'a3']);
     });
 
-    it('should read Object list', function () {
+    it('read Object list', function () {
       // new SerialTest[]
       ObjectInputStream.read(utils.bytes('array/[SerialTest')).should.eql([
         { parentVersion: 10, version: 66, con: { containVersion: 11 } },
@@ -98,8 +98,6 @@ describe('input.test.js', function () {
         { parentVersion: 10, version: 66, con: { containVersion: 11 } },
         { parentVersion: 10, version: 66, con: { containVersion: 11 } },
       ]);
-
-
     });
 
     it('read object as ArrayList<SimplePurePublisherInfo>', function () {
@@ -115,7 +113,7 @@ describe('input.test.js', function () {
   });
 
   describe('Map', function () {
-    it('should read Primitive value map', function () {
+    it('read map', function () {
       ObjectInputStream.read(utils.bytes('map/int'))
         .should.eql({ '0': 0, '1': 1, '2': 2 });
       ObjectInputStream.read(utils.bytes('map/int2'))
@@ -294,7 +292,7 @@ describe('input.test.js', function () {
   });
 
   describe('Simple Object', function () {
-    it('read SerialTestRef object withType = false', function () {
+    it('read SerialTestRef object', function () {
       var ois = new ObjectInputStream(utils.bytes('SerialTestRef'));
       var foo = ois.read();
       foo.should.eql({
@@ -302,7 +300,7 @@ describe('input.test.js', function () {
       });
     });
 
-    it('read SerialTestValues object withType = false', function () {
+    it('read SerialTestValues object', function () {
       var ois = new ObjectInputStream(utils.bytes('SerialTestValues'));
       var foo = ois.read();
       foo.should.eql({
@@ -318,7 +316,7 @@ describe('input.test.js', function () {
       });
     });
 
-    it('read SerialTest2 object withType = false', function () {
+    it('read SerialTest2 object', function () {
       var ois = new ObjectInputStream(utils.bytes('SerialTest2'));
       var foo = ois.read();
       foo.should.eql({
@@ -340,7 +338,7 @@ describe('input.test.js', function () {
       });
     });
 
-    it('read SerialTest object withType = false', function () {
+    it('read SerialTest object', function () {
       // http://www.javaworld.com/article/2072752/the-java-serialization-algorithm-revealed.html
       var ois = new ObjectInputStream(utils.bytes('SerialTest'));
       var foo = ois.read();
@@ -351,7 +349,7 @@ describe('input.test.js', function () {
       });
     });
 
-    it('read SerialTest object withType = true', function () {
+    it('read SerialTest object (withType = true)', function () {
       var ois = new ObjectInputStream(utils.bytes('SerialTest'), true);
       var foo = ois.read();
       foo.should.eql({
@@ -382,7 +380,7 @@ describe('input.test.js', function () {
       });
     });
 
-    it('should read PureClientInfo', function () {
+    it('read PureClientInfo', function () {
       var info = ObjectInputStream.read(utils.bytes('object/PureClientInfo'));
       info.should.eql({
         isValid: true,
@@ -394,7 +392,7 @@ describe('input.test.js', function () {
       });
     });
 
-    it('should read PurePublisherInfo', function () {
+    it('read PurePublisherInfo', function () {
       var info = ObjectInputStream.read(utils.bytes('object/PurePublisherInfo'));
       info.should.eql({
         isValid: true,
