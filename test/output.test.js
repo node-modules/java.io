@@ -18,6 +18,7 @@ var fs = require('fs');
 var path = require('path');
 var should = require('should');
 var utils = require('./utils');
+var InputStream = require('../lib/input');
 var OutputStream = require('../lib/output');
 
 describe('output.test.js', function () {
@@ -43,17 +44,15 @@ describe('output.test.js', function () {
     });
 
     it('write ArrayList', function () {
+      var wstream = fs.createWriteStream(path.join(__dirname, 'fout.bin'));
+      wstream.write(OutputStream.write(utils.obj('array/objs2')));
+      wstream.end();
+      OutputStream.write(utils.obj('array/objs2')).should.eql(utils.bytes('array/objs2'));
       OutputStream.write(utils.obj('array/objs')).should.eql(utils.bytes('array/objs'));
       OutputStream.write(utils.obj('array/strs')).should.eql(utils.bytes('array/strs'));
     });
 
     it('write Object list', function () {
-      /*
-      var wstream = fs.createWriteStream(path.join(__dirname, 'fout.bin'));
-      wstream.write(OutputStream.write(utils.obj('array/[SerialTest')));
-      wstream.end();
-      */
-
       OutputStream.write(utils.obj('array/[SerialTest')).should.eql(utils.bytes('array/[SerialTest'));
       OutputStream.write(utils.obj('array/SerialTest_list')).should.eql(utils.bytes('array/SerialTest_list'));
     });
@@ -64,7 +63,21 @@ describe('output.test.js', function () {
   });
 
   describe('Map', function () {
-    it('write primitive map', function() {
+    it('write map', function() {
+
+      // NOTE:
+      // cannot compare the output buffer with bin file directly
+      // because map cannot guarantee the order that the entries be written in
+      //   when some key is number
+      var obj = utils.obj('map/int');
+      var outBuf = OutputStream.write(obj);
+      var inputStream = new InputStream(outBuf, true);
+      var readObj = inputStream.readObject();
+      obj.should.eql(readObj);
+
+      OutputStream.write(utils.obj('map/boolean')).should.eql(utils.bytes('map/boolean'));
+      OutputStream.write(utils.obj('map/objs')).should.eql(utils.bytes('map/objs'));
+      OutputStream.write(utils.obj('map/String')).should.eql(utils.bytes('map/String'));
     })
   });
 
@@ -132,5 +145,6 @@ describe('output.test.js', function () {
   });
 
   describe('Simple Object', function () {
+
   });
 });

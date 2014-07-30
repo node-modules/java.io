@@ -1,4 +1,5 @@
-module.exports = { '$': { size: 1 },
+module.exports = { '$': { size: 1 ,
+    capacity: 10},
   '$class':
    { name: 'java.util.ArrayList',
      serialVersionUID: '8683452581122892189',

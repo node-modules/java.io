@@ -37,7 +37,8 @@ module.exports = {
     }
   }],
   '$' : {
-    size : 3
+    size : 3,
+    capacity: 10
   },
   '$class' : {
     name : 'java.util.ArrayList',
