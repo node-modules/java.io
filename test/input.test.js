@@ -77,6 +77,10 @@ describe('input.test.js', function () {
     });
 
     it('read ArrayList', function () {
+      var arr = [];
+      for (var i = 0; i < 100; i++) { arr.push(1) }
+      ObjectInputStream.read(utils.bytes('array/objs2')).should.eql(arr);
+
       // ArrayList objs
       ObjectInputStream.read(utils.bytes('array/objs')).should.eql([1, null, 1024.1]);
       // ArrayList<String>
@@ -137,6 +141,15 @@ describe('input.test.js', function () {
           'byte': 1,
           'char': 22
         });
+
+      var kvs = 'abcdefghijklmnopqrstuvwxyz';
+      var map0 = {};
+      for (var i = 0; i < 26; i++) {
+        var t = kvs[i];
+        map0[t] = t;
+      };
+      ObjectInputStream.read(utils.bytes('map/String'))
+        .should.eql(map0);
     });
   });
 
