@@ -44,9 +44,6 @@ describe('output.test.js', function () {
     });
 
     it('write ArrayList', function () {
-      var wstream = fs.createWriteStream(path.join(__dirname, 'fout.bin'));
-      wstream.write(OutputStream.write(utils.obj('array/objs2')));
-      wstream.end();
       OutputStream.write(utils.obj('array/objs2')).should.eql(utils.bytes('array/objs2'));
       OutputStream.write(utils.obj('array/objs')).should.eql(utils.bytes('array/objs'));
       OutputStream.write(utils.obj('array/strs')).should.eql(utils.bytes('array/strs'));
@@ -64,7 +61,6 @@ describe('output.test.js', function () {
 
   describe('Map', function () {
     it('write map', function() {
-
       // NOTE:
       // cannot compare the output buffer with bin file directly
       // because map cannot guarantee the order that the entries be written in
@@ -145,6 +141,33 @@ describe('output.test.js', function () {
   });
 
   describe('Simple Object', function () {
+    it('write SerialTestRef object', function () {
+      OutputStream.write(utils.obj('SerialTestRef')).should.eql(utils.bytes('SerialTestRef'));
+    });
 
+    it('write SerialTestValues object', function () {
+      OutputStream.write(utils.obj('SerialTestValues')).should.eql(utils.bytes('SerialTestValues'));
+    });
+
+    it('write SerialTest2 object', function () {
+      OutputStream.write(utils.obj('SerialTest2')).should.eql(utils.bytes('SerialTest2'));
+    });
+
+    it('write SerialTest object', function () {
+      OutputStream.write(utils.obj('SerialTest')).should.eql(utils.bytes('SerialTest'));
+    });
+
+    it('write PureClientInfo', function () {
+      OutputStream.write(utils.obj('object/PureClientInfo')).should.eql(utils.bytes('object/PureClientInfo'));
+    });
+
+    it('write PurePublisherInfo', function () {
+
+      var wstream = fs.createWriteStream(path.join(__dirname, 'fout.bin'));
+      wstream.write(OutputStream.write(utils.obj('object/PurePublisherInfo')));
+      wstream.end();
+
+      OutputStream.write(utils.obj('object/PurePublisherInfo')).should.eql(utils.bytes('object/PurePublisherInfo'));
+    });
   });
 });
