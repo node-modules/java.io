@@ -27,15 +27,15 @@ A node implement of "java.io.InputObjectStream.readObject()" and "java.io.Output
 
 ## Install
 
-```
-$ npm install java.io
+```bash
+$ npm install java.io --save
 ```
 
 ## Usage
 
 ### 1. readObject()
 
-```
+```js
 var fs = require('fs');
 var io = require('java.io');
 var InputObjectStream = io.InputObjectStream;
@@ -54,7 +54,7 @@ var obj2 = in.readObject();
 
 `obj` should be:
 
-```
+```js
 {
   '$' : {
     value : 1024
@@ -80,26 +80,26 @@ var obj2 = in.readObject();
 
 `obj2` should be:
 
-```
+```js
 1024
 ```
 
 if you only care about the first object from input stream, you could write the code briefly:
 
-```
+```js
 var buf3 = fs.readFileSync('./test/fixtures/out/map/boolean.bin');
 var obj3 = InputObjectStream.readObject(buf);
 ```
 
 then `obj3` should be:
 
-```
+```js
 { 'true': true, 'false': false }
 ```
 
 ### 2. writeObject(obj)
 
-```
+```js
 var outputObjectStream = new OutputObjectStream();
 
 // 1. Passed in argument must contains the whole info
@@ -110,7 +110,7 @@ var buf = outputObjectStream.writeObject(obj);
 
 A brief style is also OK:
 
-```
+```js
 OutputObjectStream.writeObject(obj);
 ```
 
@@ -123,13 +123,13 @@ A convenient way to convert ordinary JavaScript object to object of standard for
   - type: string | boolean | int | short | long | char | byte | float | double |
 - return: normalized object
 
-```
+```js
 var outputObjectStream = new OutputObjectStream();
 var normalizedObj = OutputObjectStream.normalize(true);
 var buf = outputObjectStream.writeObject(normalizedObj);
 ```
 
-```
+```js
 normalize(null)
 
 normalize('string)
@@ -147,7 +147,7 @@ normalize( {'true': true, 'false': false}, 'boolean')
 
 ## Data structure
 
-```
+```js
 {
   // if a object has it's own readObject/writeObject method
   // save it's special value here
@@ -169,7 +169,7 @@ normalize( {'true': true, 'false': false}, 'boolean')
 }
 ```
 
-[some more examples](test/fixtures/in/)
+[Some more examples](test/fixtures/in/)
 
 ## License
 
