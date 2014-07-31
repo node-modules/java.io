@@ -36,6 +36,7 @@ describe('output.test.js', function () {
       OutputStream.write(utils.obj('array/[int')).should.eql(utils.bytes('array/[int'));
       OutputStream.write(utils.obj('array/[byte')).should.eql(utils.bytes('array/[byte'));
       OutputStream.write(utils.obj('array/[char')).should.eql(utils.bytes('array/[char'));
+      OutputStream.write(utils.obj('array/[short')).should.eql(utils.bytes('array/[short'));
       OutputStream.write(utils.obj('array/[float')).should.eql(utils.bytes('array/[float'));
       OutputStream.write(utils.obj('array/[double')).should.eql(utils.bytes('array/[double'));
       OutputStream.write(utils.obj('array/[String')).should.eql(utils.bytes('array/[String'));
@@ -162,11 +163,11 @@ describe('output.test.js', function () {
     });
 
     it('write PurePublisherInfo', function () {
-
+      /*
       var wstream = fs.createWriteStream(path.join(__dirname, 'fout.bin'));
       wstream.write(OutputStream.write(utils.obj('object/PurePublisherInfo')));
       wstream.end();
-
+      */
       OutputStream.write(utils.obj('object/PurePublisherInfo')).should.eql(utils.bytes('object/PurePublisherInfo'));
     });
   });

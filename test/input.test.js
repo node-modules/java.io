@@ -69,6 +69,8 @@ describe('input.test.js', function () {
       ObjectInputStream.read(utils.bytes('array/[int')).should.eql([0, 1, 2, 3]);
       ObjectInputStream.read(utils.bytes('array/[byte')).should.eql([0, 1, 2, 3]);
       ObjectInputStream.read(utils.bytes('array/[char')).should.eql([97, 98, 99, 100]);
+      ObjectInputStream.read(utils.bytes('array/[short')).should.eql([1, 2, 3]);
+      ObjectInputStream.read(utils.bytes('array/[long')).should.eql([1, 2, 3]);
       ObjectInputStream.read(utils.bytes('array/[float'))
         .should.eql([0, 1.100000023841858, 2.200000047683716, 3.3333001136779785]);
       ObjectInputStream.read(utils.bytes('array/[double')).should.eql([0, 1.1, 2.2, 3.3333]);
