@@ -28,7 +28,7 @@ test-cov cov: install
 		$(TESTS)
 	@./node_modules/.bin/cov coverage
 
-test-all: install jshint test cov
+test-all: install test cov
 
 autod: install
 	@./node_modules/.bin/autod -w
