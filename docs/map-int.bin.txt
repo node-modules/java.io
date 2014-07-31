@@ -1,0 +1,230 @@
+                                   stream:
+                                     magic version contents
+
+0000000 ac ed                        magic
+        00 05                        version
+
+                                     contents:
+                                       contents content
+
+                                       content:
+                                         object:
+                                           newObject:
+                                             TC_OBJECT classDesc newHandle classdata[]
+
+        73                                   TC_OBJECT
+
+                                             classDesc:
+                                               newClassDesc:
+                                                 TC_CLASSDESC className serialVersionUID newHandle classDescInfo
+
+        72                                       TC_CLASSDESC
+        00 11
+        6a 61 76 61 2e 75 74 69
+0000010 6c 2e 48 61 73 68 4d 61
+        70                                       className ("java.util.HashMap")
+        05 07 da c1 c3 16 60
+0000020 d1                                       serialVersionUID
+                                                 newHandle
+
+                                                 classDescInfo:
+                                                   classDescFlags fields classAnnotation superClassDesc
+
+        03                                         classDescFlags
+
+                                                   fields:
+                                                     (short)<count>  fieldDesc[count]
+
+        00 02                                        count
+
+                                                     fieldDesc:
+                                                       primitiveDesc:
+                                                         prim_typecode fieldName
+
+        46                                               prim_typecode (F // float)
+        00 0a
+        6c
+        6f 61 64 46 61 63 74 6f
+0000030 72                                               fieldName ("loadFactor")
+
+        49                                               prim_typecode (I // integer)
+        00 09
+        74 68 72 65
+        73 68 6f 6c 64                                   fieldName ("threshold")
+
+        78                                         classAnnotation (TC_ENDBLOCKDATA)
+        70                                         superClassDesc (TC_NULL)
+
+                                           newHandle
+
+                                           classdata:
+                                             wrclass objectAnnotation
+
+                                             wrclass:
+                                               nowrclass:
+                                                 values
+
+        3f
+0000040 40 00 00                                 value of "loadFactor"
+        00 00 00 0c                              value of threshold
+
+
+                                             objectAnnotation:
+                                               contents endBlockData
+
+                                               contents:
+                                                 contents: content
+
+                                                 content:
+                                                   blockdata:
+                                                     blockdatashort:
+                                                       TC_BLOCKDATA (unsigned byte)<size> (byte)[size]
+
+        77                                             TC_BLOCKDATA
+        08                                             (unsigned byte)<size>
+
+                                   hashMap.readObject()
+        00 00 00 10                int numBuckets = s.readInt();
+
+        00 00 00
+0000050 03                         int size = s.readInt();
+
+                                   newString:
+                                     TC_STRING newHandle (utf)
+
+        74                           TC_STRING
+        00 01
+        32                           (utf) ("2")
+
+                                   newObject:
+                                     TC_OBJECT classDesc newHandle classdata[]
+
+        73                           TC_OBJECT
+
+                                     classDesc:
+                                       newClassDesc:
+                                         TC_CLASSDESC className serialVersionUID newHandle classDescInfo
+
+        72                               TC_CLASSDESC
+        00 11
+        6a 61 76 61 2e 6c 61
+0000060 6e 67 2e 49 6e 74 65 67
+        65 72                            className ("java.lang.Integer")
+        12 e2 a0 a4 f7 81
+0000070 87 38                            serialVersionUID
+
+                                         classDescInfo:
+                                            classDescFlags fields classAnnotation superClassDesc
+
+        02                                  classDescFlags
+
+                                            fields:
+                                                (short)<count>  fieldDesc[count]
+
+        00 01                                   count
+
+                                                fieldDesc:
+                                                  primitiveDesc:
+                                                    prim_typecode fieldName
+
+        49                                          prim_typecode (I // Integer)
+        00 05
+        76 61 6c 75 65                              fieldName ("value")
+
+                                            classAnnotation:
+                                              endBlockData
+
+        78                                    endBlockData (TC_ENDBLOCKDATA)
+
+                                            superClassDesc:
+                                              classDesc:
+                                                newClassDesc:
+                                                  TC_CLASSDESC className serialVersionUID newHandle classDescInfo
+
+        72                                        TC_CLASSDESC
+        00
+0000080 10
+        6a 61 76 61 2e 6c 61 6e
+        67 2e 4e 75 6d 62 65
+0000090 72                                        className ("java.lang.Number")
+        86 ac 95 1d 0b 94 e0 8b                   serialVersionUID
+
+                                                  classDescInfo:
+                                                    classDescFlags fields classAnnotation superClassDesc
+
+        02                                          classDescFlags
+
+                                                    fields:
+                                                      (short)<count>  fieldDesc[count]
+
+        00 00                                         count
+
+                                                    classAnnotation:
+                                                      endBlockData
+
+        78                                            endBlockData (TC_ENDBLOCKDATA)
+
+                                                    superClassDesc:
+                                                      classDesc:
+                                                        nullReference
+
+        70                                              nullReference (TC_NULL)
+
+                                      classdata[]
+
+                                      classdata:
+                                        nowrclass
+
+        00 00
+00000a0 00 02                           2
+
+                                   newString:
+                                     TC_STRING newHandle (utf)
+
+        74                           TC_STRING
+        00 01
+        31                           (utf) ("1")
+
+                                   newObject:
+                                     TC_OBJECT classDesc newHandle classdata[]
+
+        73                           TC_OBJECT
+
+                                     classDesc:
+                                       (ClassDesc)prevObject:
+                                         TC_REFERENCE (int)handle
+
+        71                               TC_REFERENCE
+        00 7e 00 03                      (int)handle
+
+                                     classdata:
+                                       nowrclass
+
+        00 00 00 01                    1
+
+
+00000b0 74
+        00 01
+        30
+
+        73
+        71
+        00 7e 00 03
+        00 00 00 00
+
+        78                        TC_ENDBLOCKDATA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

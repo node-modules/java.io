@@ -1,0 +1,232 @@
+00000000  ac ed 00 05
+
+                                   newObject:
+                                     TC_OBJECT classDesc newHandle classdata[]
+
+          73                         TC_OBJECT
+
+                                     classDesc:
+                                       newClassDesc:
+                                         TC_CLASSDESC className serialVersionUID newHandle classDescInfo
+
+          72                             TC_CLASSDESC
+          00 13
+          6a 61 76 61 2e 75 74 69
+00000010  6c 2e 41 72 72 61 79 4c
+          69 73 74                       className ("java.util.ArrayList")
+
+          78 81 d2 1d 99
+00000020  c7 61 9d                       serialVersionUID
+
+                                         classDescInfo:
+                                           classDescFlags fields classAnnotation superClassDesc
+
+          03                               classDescFlags
+
+                                           fields:
+                                             (short)<count>  fieldDesc[count]
+
+          00 01                              (short)<count>
+
+                                             fieldDesc:
+                                               primitiveDesc:
+                                                 prim_typecode fieldName
+
+          49                                     prim_typecode ("I")
+
+          00
+          04
+          73 69 7a 65                            fieldName (3)
+
+                                             classAnnotation:
+                                               endBlockData
+
+          78                                   endBlockData (TC_ENDBLOCKDATA)
+
+          70                                 superClassDesc (TC_NULL)
+
+                                     classdata:
+                                       wrclass objectAnnotation  // SC_SERIALIZABLE & classDescFlag &&
+                                                                 // SC_WRITE_METHOD & classDescFlags
+
+                                       wrclass:
+                                         nowrclass
+                                           values
+
+          00
+00000030  00 00 03                         value (size: 3)
+
+                                       objectAnnotation:
+                                         contents endBlockData
+
+                                         contents:
+                                           content:
+                                             blockdata:
+                                               blockdatashort
+                                                 TC_BLOCKDATA (unsigned byte)<size> (byte)[size]
+
+          77                                     TC_BLOCKDATA
+          04                                     size
+          00 00 00
+          0a
+
+                                       newObject:
+                                         TC_OBJECT classDesc newHandle classdata[]
+
+          73                             TC_OBJECT
+
+                                         newClassDesc:
+                                           TC_CLASSDESC className serialVersionUID newHandle classDescInfo
+
+          72                               TC_CLASSDESC
+          00 11
+          6a 61 76
+00000040  61 2e 6c 61 6e 67 2e 49
+          6e 74 65 67 65 72                className ("java.lang.Integer")
+
+          12 e2
+00000050  a0 a4 f7 81 87 38                serialVersionUID
+
+                                           classDescInfo:
+                                             classDescFlags fields classAnnotation superClassDesc
+
+          02                                 classDescFlags
+
+                                             fields:
+                                               (short)<count>  fieldDesc[count]
+
+          00
+          01                                   count
+
+                                               fieldDesc:
+                                                 primitiveDesc:
+                                                  prim_typecode fieldName
+
+          49                                      prim_typecode ("I")
+          00 05
+          76 61 6c 75
+00000060  65                                      fieldName ("value")
+
+                                             classAnnotation:
+                                               endBlockData
+
+          78                                   endBlockData
+
+                                             superClassDesc:
+                                               classDesc:
+                                                 newClassDesc:
+                                                   TC_CLASSDESC className serialVersionUID newHandle classDescInfo
+
+          72                                       TC_CLASSDESC
+          00 10
+          6a 61 76
+          61 2e 6c 61 6e 67 2e 4e
+00000070  75 6d 62 65 72                           className ("java.lang.Number")
+          86 ac 95
+          1d 0b 94 e0 8b                           serialVersionUID
+
+                                                   classDescInfo:
+                                                     classDescFlags fields classAnnotation superClassDesc
+
+          02                                         classDescFlags
+
+                                                     fields:
+                                                       (short)<count>  fieldDesc[count]
+          00 00
+
+                                                     classAnnotation:
+                                                       endBlockData
+00000080  78
+
+          70                                         superClassDesc
+
+          00 00 00 01                                classdata
+
+          70
+
+                                       newObject:
+                                         TC_OBJECT classDesc newHandle classdata[]
+
+          73                             TC_OBJECT
+
+                                         classDesc:
+                                           newClassDesc:
+                                             TC_CLASSDESC className serialVersionUID newHandle classDescInfo
+
+          72                                 TC_CLASSDESC
+
+          00 10
+          6a 61 76 61 2e
+00000090  6c 61 6e 67 2e 44 6f 75
+          62 6c 65                          className ("java.lang.Double")
+
+          80 b3 c2 4a 29
+000000a0  6b fb 04                          serialVersionUID
+
+                                            classDescInfo:
+                                             classDescFlags fields classAnnotation superClassDesc
+
+          02                                 classDescFlags
+
+                                             fields:
+                                               (short)<count>  fieldDesc[count]
+
+          00 01                                count
+
+                                               fieldDesc:
+                                                 primitiveDesc:
+                                                   prim_typecode fieldName
+
+          44                                       prim_typecode ("D")
+          00
+          05
+          76 61 6c 75 65                           fieldName ("value")
+
+                                               classAnnotation:
+                                                 endBlockData
+
+          78                                     endBlockData
+
+                                               superClassDesc:
+                                                 classDesc:
+                                                   (ClassDesc)prevObject
+
+          71
+000000b0  00 7e 00 03
+
+          40 90 00 66  66 66 66 66
+
+          78
+000000bd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
