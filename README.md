@@ -132,7 +132,7 @@ var buf = outputObjectStream.writeObject(normalizedObj);
 ```js
 normalize(null)
 
-normalize('string)
+normalize('string')
 
 normalize(true)
 
