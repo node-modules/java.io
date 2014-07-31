@@ -1,10 +1,23 @@
 # java.io
 
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![Test coverage][coveralls-image]][coveralls-url]
+[![Gittip][gittip-image]][gittip-url]
+[![David][david-image]][david-url]
+
+[npm-image]: https://img.shields.io/npm/v/java.io.svg?style=flat
+[npm-url]: https://npmjs.org/package/java.io
+[travis-image]: https://img.shields.io/travis/node-modules/java.io.svg?style=flat
+[travis-url]: https://travis-ci.org/node-modules/java.io
+[coveralls-image]: https://img.shields.io/coveralls/node-modules/java.io.svg?style=flat
+[coveralls-url]: https://coveralls.io/r/node-modules/java.io?branch=master
+[gittip-image]: https://img.shields.io/gittip/fengmk2.svg?style=flat
+[gittip-url]: https://www.gittip.com/fengmk2/
+[david-image]: https://img.shields.io/david/node-modules/java.io.svg?style=flat
+[david-url]: https://david-dm.org/node-modules/java.io
+
 A node implement of "java.io.InputObjectStream.readObject()" and "java.io.OutputObjectStream.writeObject()".
-
-[![Build Status](https://secure.travis-ci.org/node-modules/java.io.png)](http://travis-ci.org/node-modules/java.io)
-
-[![NPM](https://nodei.co/npm/java.io.png?downloads=true&stars=true)](https://nodei.co/npm/java.io/)
 
 ## Protocol
 
@@ -107,7 +120,7 @@ A convenient way to convert ordinary JavaScript object to object of standard for
 
 - params
   - obj: accept all primitive value or primitive array and map
-  - type: string | boolean | int | short | long | char | byte | float | double | 
+  - type: string | boolean | int | short | long | char | byte | float | double |
 - return: normalized object
 
 ```
@@ -126,7 +139,7 @@ normalize(true)
 normalize(1) // quals to normalize(1, 'int')
 
 normalize(-123456, long)
-  
+
 normalize([ true, false, false, false ], 'boolean')
 
 normalize( {'true': true, 'false': false}, 'boolean')
@@ -139,10 +152,10 @@ normalize( {'true': true, 'false': false}, 'boolean')
   // if a object has it's own readObject/writeObject method
   // save it's special value here
   '_$': ...,
-  
+
   // value of object
   '$': ...,
-  
+
   // class description
   '$class': {
     name: 'className',

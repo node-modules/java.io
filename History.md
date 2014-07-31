@@ -1,4 +1,9 @@
 
+1.0.0 / 2014-07-31
+==================
+
+ * Impl Object Serialization Stream Protocol v2.0 (@fool2fish)
+
 0.0.1 / 2014-04-04
 ==================
 

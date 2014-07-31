@@ -1,6 +1,6 @@
 {
   "name": "java.io",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Object Serialization Stream Protocol javascript implement",
   "main": "index.js",
   "scripts": {
