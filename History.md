@@ -1,4 +1,15 @@
 
+1.1.0 / 2014-08-04
+==================
+
+ * Fix jshint errors.
+ * Update _writeSerialData()
+ * Remove unused param: unshared.
+ * Read/writeBlockHeader in class that has its own read/writeObject method.
+ * Object overwrite read/writeObject() will call defaultRead/WriteObject() in its methods.
+ * fix string
+ * update readme code style
+
 1.0.0 / 2014-07-31
 ==================
 
