@@ -57,7 +57,7 @@ describe('normalize.test.js', function () {
       for (var i = 0; i < 26; i++) {
         var t = kvs[i];
         map0[t] = t;
-      };
+      }
       var normalizedMap0 = normalize(map0, 'string');
       var map0Buf = OutputStream.write(normalizedMap0);
       var map0InputStream = new InputStream(map0Buf, true);
