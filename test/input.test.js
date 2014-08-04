@@ -149,7 +149,7 @@ describe('input.test.js', function () {
       for (var i = 0; i < 26; i++) {
         var t = kvs[i];
         map0[t] = t;
-      };
+      }
       ObjectInputStream.read(utils.bytes('map/String'))
         .should.eql(map0);
     });
