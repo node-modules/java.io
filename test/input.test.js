@@ -431,5 +431,20 @@ describe('input.test.js', function () {
         datumId: 'some-datumId'
       });
     });
+
+    it('read NCommand', function() {
+      ObjectInputStream.read(utils.bytes('NCommand')).should.eql({
+        isNewVersion: false,
+        id: '10.62.50.148:2923:0',
+        name: 'queryServerlist',
+        params: null });
+
+      ObjectInputStream.read(utils.bytes('NCommand2')).should.eql({
+        isNewVersion: false,
+        id: null,
+        name: 'queryServerlist',
+        params: ['abc'] });
+    });
+
   });
 });
