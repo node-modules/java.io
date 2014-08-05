@@ -1,4 +1,10 @@
 
+1.1.1 / 2014-08-05
+==================
+
+ * Fix read field of array type error.
+ * Check if field of array type is null first when get fields.
+
 1.1.0 / 2014-08-04
 ==================
 
