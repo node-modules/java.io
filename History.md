@@ -1,4 +1,12 @@
 
+1.2.0 / 2014-08-06
+==================
+
+ * Tighten the check if an class that has read/write object method has been added in.
+ * Update docs on addObject method.
+ * Convert input.addObject() and output.addObject() to io.addObject()
+ * Give a distinct error message when some class dose not implement its readObject() or writeObject()
+
 1.1.1 / 2014-08-05
 ==================
 
