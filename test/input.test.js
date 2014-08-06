@@ -22,6 +22,7 @@ console.log(require('util').inspect(
 
 var should = require('should');
 var utils = require('./utils');
+var io = require('../lib');
 var ObjectInputStream = require('../lib/input');
 
 describe('input.test.js', function () {
@@ -445,6 +446,12 @@ describe('input.test.js', function () {
         name: 'queryServerlist',
         params: ['abc'] });
     });
-
   });
+
+  describe('addObject', function() {
+    it ('addObject', function() {
+      io.addObject('java.util.ArrayList', require('../lib/objects/array_list'));
+    })
+  });
+
 });
