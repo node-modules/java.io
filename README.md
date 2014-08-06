@@ -145,6 +145,21 @@ normalize([ true, false, false, false ], 'boolean')
 normalize( {'true': true, 'false': false}, 'boolean')
 ```
 
+### 4. addObject()
+
+If a class has writeObject/readObject methods, you need to implement the corresponding methods, and add them via addObject() before read or write the object.
+
+```js
+var io = require('java.io');
+io.addObject({{className}}, {{class}});
+
+```
+
+Builtin classes:
+
+- [java.util.ArrayList](./lib/objects/array_list.js)
+- [java.util.HashMap](./lib/objects/hash_map.js)
+
 ## Data structure
 
 ```js
