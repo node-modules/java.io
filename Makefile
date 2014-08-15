@@ -4,7 +4,7 @@ TIMEOUT = 1000
 MOCHA_OPTS =
 
 install:
-	@npm install --registry=http://registry.npm.taobao.org --disturl=http://dist.cnpmjs.org
+	@npm install --registry=https://registry.npm.taobao.org
 
 jshint: install
 	@./node_modules/.bin/jshint .
@@ -42,7 +42,7 @@ test-travis: install
 test-all: install test cov
 
 autod: install
-	@./node_modules/.bin/autod -w
+	@./node_modules/.bin/autod -w --prefix "~"
 	@$(MAKE) install
 
 contributors: install
