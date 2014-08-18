@@ -450,6 +450,21 @@ describe('input.test.js', function () {
     });
   });
 
+  describe('java.util.LinkedList', function () {
+    it('should read java.util.LinkedList<String>', function () {
+      ObjectInputStream.read(utils.bytes('LinkedList/String')).should.eql([ 'item1', 'item2' ]);
+      ObjectInputStream.read(utils.bytes('LinkedList/String'), true).should.eql({
+        '$': [ 'item1', 'item2' ],
+        '$class':
+          { name: 'java.util.LinkedList',
+            serialVersionUID: '876323262645176354',
+            flags: 3,
+            fields: [],
+            superClass: null }
+      });
+    });
+  });
+
   describe('addObject', function() {
     it('addObject', function() {
       io.addObject('java.util.ArrayList', require('../lib/objects/array_list'));
