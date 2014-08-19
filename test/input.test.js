@@ -259,6 +259,8 @@ describe('input.test.js', function () {
       ObjectInputStream.read(utils.bytes('long/-90071992547409931')).should.equal('-90071992547409931');
       ObjectInputStream.read(utils.bytes('long/-9223372036854774807')).should.equal('-9223372036854774807');
       ObjectInputStream.read(utils.bytes('long/-9223372036854774808')).should.equal('-9223372036854774808');
+
+      ObjectInputStream.read(utils.bytes('long/1408007424378977000')).should.equal('1408007424378977000');
     });
 
     it('read short', function () {
@@ -448,10 +450,33 @@ describe('input.test.js', function () {
     });
   });
 
+  describe('java.util.LinkedList', function () {
+    it('should read java.util.LinkedList<String>', function () {
+      ObjectInputStream.read(utils.bytes('LinkedList/String')).should.eql([ 'item1', 'item2' ]);
+      ObjectInputStream.read(utils.bytes('LinkedList/String'), true).should.eql({
+        '$': [ 'item1', 'item2' ],
+        '$class':
+          { name: 'java.util.LinkedList',
+            serialVersionUID: '876323262645176354',
+            flags: 3,
+            fields: [],
+            superClass: null }
+      });
+    });
+  });
+
   describe('addObject', function() {
-    it ('addObject', function() {
+    it('addObject', function() {
       io.addObject('java.util.ArrayList', require('../lib/objects/array_list'));
     })
   });
 
+  describe('readLong()', function() {
+    it('should io read long', function () {
+      var io = new ObjectInputStream(utils.bytes('long/writeLong-1408007424378977000'));
+      // skip 2 bytes, block flag
+      io.in.read(2)
+      io.readLong().toString().should.equal('1408007424378977000');
+    });
+  });
 });
