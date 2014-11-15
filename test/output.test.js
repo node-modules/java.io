@@ -21,6 +21,8 @@ var utils = require('./utils');
 var InputStream = require('../lib/input');
 var OutputStream = require('../lib/output');
 
+require('./addobjects');
+
 describe('output.test.js', function () {
   describe('Enum', function () {
     it('write enum', function() {
@@ -148,6 +150,10 @@ describe('output.test.js', function () {
 
     it('write SerialTestValues object', function () {
       OutputStream.write(utils.obj('SerialTestValues')).should.eql(utils.bytes('SerialTestValues'));
+    });
+
+    it('write SerialTest3 object', function () {
+      OutputStream.write(utils.obj('SerialTest3')).should.eql(utils.bytes('SerialTest3'));
     });
 
     it('write SerialTest2 object', function () {

@@ -25,6 +25,8 @@ var utils = require('./utils');
 var io = require('../lib');
 var ObjectInputStream = require('../lib/input');
 
+require('./addobjects');
+
 describe('input.test.js', function () {
   describe('read()', function () {
     it('call read() twice work', function () {
@@ -332,6 +334,12 @@ describe('input.test.js', function () {
         d: 1024.21,
         fv: 0.11999999731779099
       });
+    });
+
+    it('read SerialTest3 object', function () {
+      var ois = new ObjectInputStream(utils.bytes('SerialTest3'), true);
+      var foo = ois.readObject();
+      foo.should.eql(utils.obj('SerialTest3'));
     });
 
     it('read SerialTest2 object', function () {
