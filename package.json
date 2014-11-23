@@ -12,19 +12,17 @@
     }
   },
   "dependencies": {
-    "byte": "~0.3.1",
-    "debug": "~1.0.4",
-    "long": "~2.0.0",
-    "utility": "~1.0.0"
+    "byte": "~1.1.1",
+    "debug": "~2.1.0",
+    "utility": "~1.2.1"
   },
   "devDependencies": {
     "autod": "*",
     "contributors": "*",
-    "cov": "*",
-    "istanbul-harmony": "*",
+    "istanbul": "*",
     "jshint": "*",
     "mocha": "*",
-    "should": "~4.0.4"
+    "should": "~4.3.0"
   },
   "homepage": "https://github.com/node-modules/java.io",
   "repository": {
@@ -36,7 +34,8 @@
     "email": "fengmk2@gmail.com"
   },
   "keywords": [
-    "ObjectOutputStream", "OutputStream",
+    "ObjectOutputStream",
+    "OutputStream",
     "Serialization",
     "java.io",
     "io",

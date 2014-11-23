@@ -152,6 +152,12 @@ describe('output.test.js', function () {
       OutputStream.write(utils.obj('SerialTestValues')).should.eql(utils.bytes('SerialTestValues'));
     });
 
+    it('write SerialError object', function () {
+      (function () {
+        OutputStream.write(utils.obj('SerialError'));
+      }).should.throw('Class "test.Error" dose not be added in or not implement writeObject()');
+    });
+
     it('write SerialTest3 object', function () {
       OutputStream.write(utils.obj('SerialTest3')).should.eql(utils.bytes('SerialTest3'));
     });

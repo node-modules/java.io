@@ -1,10 +1,9 @@
 test/
-coverage.html
+coverage/
+java/
 Makefile
 .travis.yml
 logo.png
 .jshintignore
 .jshintrc
 .gitingore
-coverage/
-java/

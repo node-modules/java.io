@@ -11,14 +11,13 @@ jshint: install
 
 test: install
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--harmony \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		$(MOCHA_OPTS) \
 		$(TESTS)
 
 test-cov cov: install
-	@NODE_ENV=test node --harmony \
+	@NODE_ENV=test node \
 		node_modules/.bin/istanbul cover --preserve-comments \
 		./node_modules/.bin/_mocha \
 		-- -u exports \
@@ -26,10 +25,9 @@ test-cov cov: install
 		--timeout $(TIMEOUT) \
 		$(MOCHA_OPTS) \
 		$(TESTS)
-	@./node_modules/.bin/cov coverage
 
 test-travis: install
-	@NODE_ENV=test node --harmony \
+	@NODE_ENV=test node \
 		node_modules/.bin/istanbul cover --preserve-comments \
 		./node_modules/.bin/_mocha \
 		--report lcovonly \
