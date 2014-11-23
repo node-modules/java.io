@@ -14,6 +14,7 @@
   "dependencies": {
     "byte": "~0.3.1",
     "debug": "~1.0.4",
+    "is-type-of": "~0.3.1",
     "long": "~2.0.0",
     "utility": "~1.0.0"
   },
@@ -36,7 +37,8 @@
     "email": "fengmk2@gmail.com"
   },
   "keywords": [
-    "ObjectOutputStream", "OutputStream",
+    "ObjectOutputStream",
+    "OutputStream",
     "Serialization",
     "java.io",
     "io",
