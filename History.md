@@ -1,4 +1,10 @@
 
+1.2.4 / 2014-11-24
+==================
+
+ * use npm scripts instead of Makefile
+ * fix get superClass bug. Closes #8
+
 1.2.3 / 2014-11-16
 ==================
 
