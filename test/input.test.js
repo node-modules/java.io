@@ -339,7 +339,7 @@ describe('input.test.js', function () {
     it('read SerialError object', function () {
       (function () {
         var ois = new ObjectInputStream(utils.bytes('SerialError'), true);
-        var foo = ois.readObject();
+        ois.readObject();
       }).should.throw('Class "test.Error" dose not be added in or not implement readObject()');
     });
 

@@ -1,9 +1,7 @@
 test/
 coverage/
 java/
-Makefile
+docs/
 .travis.yml
-logo.png
-.jshintignore
-.jshintrc
+.jshint*
 .gitingore

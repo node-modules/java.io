@@ -14,9 +14,6 @@
  * Module dependencies.
  */
 
-var fs = require('fs');
-var path = require('path');
-var should = require('should');
 var utils = require('./utils');
 var InputStream = require('../lib/input');
 var OutputStream = require('../lib/output');
