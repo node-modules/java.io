@@ -36,7 +36,8 @@
     "email": "fengmk2@gmail.com"
   },
   "keywords": [
-    "ObjectOutputStream", "OutputStream",
+    "ObjectOutputStream",
+    "OutputStream",
     "Serialization",
     "java.io",
     "io",
