@@ -186,6 +186,10 @@ Builtin classes:
 
 [Some more examples](test/fixtures/in/)
 
+## Incompatible between 1.x and 2.x
+
+- decode java `[B` to `new Buffer([1, 2, 3])` not `[1, 2, 3]` [#10](https://github.com/node-modules/java.io/pull/10)
+
 ## License
 
 MIT

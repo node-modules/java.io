@@ -1,4 +1,9 @@
 
+2.0.0 / 2014-12-01
+==================
+
+ * feat(input): readObject byte -> Buffer, incompatible feature
+
 1.2.4 / 2014-11-24
 ==================
 
