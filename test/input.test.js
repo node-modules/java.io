@@ -69,6 +69,7 @@ describe('input.test.js', function () {
 
   describe('Array', function () {
     it('read Primitive value list', function () {
+      ObjectInputStream.read(utils.bytes('array/[byte'), true).should.have.property('$', new Buffer([0, 1, 2, 3]));
       ObjectInputStream.read(utils.bytes('array/[int')).should.eql([0, 1, 2, 3]);
       ObjectInputStream.read(utils.bytes('array/[byte')).should.eql(new Buffer([0, 1, 2, 3]));
       ObjectInputStream.read(utils.bytes('array/[char')).should.eql([97, 98, 99, 100]);
