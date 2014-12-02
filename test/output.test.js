@@ -172,12 +172,31 @@ describe('output.test.js', function () {
     });
 
     it('write PurePublisherInfo', function () {
-      /*
-      var wstream = fs.createWriteStream(path.join(__dirname, 'fout.bin'));
-      wstream.write(OutputStream.write(utils.obj('object/PurePublisherInfo')));
-      wstream.end();
-      */
       OutputStream.write(utils.obj('object/PurePublisherInfo')).should.eql(utils.bytes('object/PurePublisherInfo'));
+    });
+
+    it('write undefined property', function () {
+      var obj = {
+        "$": {
+          foo: undefined
+        },
+        "$class": {
+          "name": "xxx",
+          "serialVersionUID": "1",
+          "flags": 2,
+          "fields": [{
+             "type": "L",
+             "name": "foo",
+             "classname": "Ljava/lang/String;"
+           }],
+          "superClass": null
+        }
+      };
+      var buf = OutputStream.write(obj);
+      var inputStream = new InputStream(buf, true);
+      var readObj = inputStream.readObject();
+      obj.$.foo = null;
+      readObj.should.eql(obj);
     });
   });
 });
