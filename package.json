@@ -1,6 +1,6 @@
 {
   "name": "java.io",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Object Serialization Stream Protocol javascript implement",
   "main": "index.js",
   "scripts": {
@@ -46,5 +46,8 @@
     "node": ">= 0.10.0"
   },
   "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "tag": "1.x"
+  }
 }
