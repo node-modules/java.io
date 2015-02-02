@@ -15,7 +15,8 @@
   "dependencies": {
     "byte": "~1.1.1",
     "debug": "~2.1.0",
-    "utility": "~1.2.1"
+    "utility": "~1.2.1",
+    "long" : "*"
   },
   "devDependencies": {
     "autod": "*",

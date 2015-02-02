@@ -495,4 +495,20 @@ describe('input.test.js', function () {
       io.readLong().toString().should.equal('1408007424378977000');
     });
   });
+
+  describe('readDate()', function() {
+      it('read io read date', function() {
+         ObjectInputStream.read(utils.bytes('date/2015-1-23-16-08-23'), true).should.eql({
+             $: {
+                time: 1422511445451
+             },
+             $class: {
+                 name: 'java.util.Date',
+                 serialVersionUID: '7523967970034938905',
+                 flags: 3,
+                 fields: [],
+                 superClass: null
+             }});
+      });
+  });
 });
