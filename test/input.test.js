@@ -24,6 +24,7 @@ var should = require('should');
 var utils = require('./utils');
 var io = require('../lib');
 var ObjectInputStream = require('../lib/input');
+require('./fixtures/in/object/TestLargeData');
 
 require('./addobjects');
 
@@ -493,6 +494,62 @@ describe('input.test.js', function () {
       // skip 2 bytes, block flag
       io.in.read(2)
       io.readLong().toString().should.equal('1408007424378977000');
+    });
+  });
+
+  function basicCheck(obj, pos) {
+    Object.keys(obj).length.should.equal(2);
+    var javaUrl = 'http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html#5849==';
+    obj.java[pos].should.equal(javaUrl + pos);
+    obj.java[0].should.equal(javaUrl + 0);
+
+    // var nodeLen = obj.node.length;
+    var nodeUrl = 'https://nodejs.org/docs/latest/api/all.html==';
+    obj.node[pos].should.equal(nodeUrl + pos)
+    obj.node[0].should.equal(nodeUrl + 0)
+  }
+
+  function boundaryCheck(obj) {
+    obj.node.length.should.equal(7);
+    obj.java.length.should.equal(6);
+    /a{20}/.test(obj.node[6]).should.be.ok;
+  }
+
+  /** data 基本格式
+  node: [ 'https://nodejs.org/docs/latest/api/all.html==0',
+    'https://nodejs.org/docs/latest/api/all.html==1',
+    'https://nodejs.org/docs/latest/api/all.html==2',
+    'https://nodejs.org/docs/latest/api/all.html==3',
+    'https://nodejs.org/docs/latest/api/all.html==4',
+    'https://nodejs.org/docs/latest/api/all.html==5',
+    'aaaaaaaaaaaaaaaaaaaaaa' ],
+ java: [ 'http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html#5849==0',
+    'http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html#5849==1',
+    'http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html#5849==2',
+    'http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html#5849==3',
+    'http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html#5849==4',
+    'http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html#5849==5' ] }
+  **/
+
+  describe('readLargeObject()', function() {
+    it('should io read large object', function () {
+      var dataSmall = new ObjectInputStream(utils.bytes('object/data-small'));
+      var smallObj = dataSmall.readObject();
+      basicCheck(smallObj, 1);
+
+      var boundaryNames = ['1018', '1019', '1020', '1021', '1022', '1023', '1024', '1025', '1026'];
+
+      boundaryNames.forEach(function (name) {
+        var data = new ObjectInputStream(utils.bytes('object/data-' + name));
+        var obj = data.readObject();
+        basicCheck(obj, 5);
+        boundaryCheck(obj);
+        obj.node[6].length.should.equal(parseInt(name) - 998);
+      });
+
+      var dataLarge = new ObjectInputStream(utils.bytes('object/data-large'));
+      var largeObj = dataLarge.readObject();
+      basicCheck(largeObj, 19);
     });
   });
 });
