@@ -1,4 +1,9 @@
 
+2.1.1 / 2015-10-28
+==================
+
+ * chore: replace const to var, to support old version node
+
 2.1.0 / 2015-06-04
 ==================
 
