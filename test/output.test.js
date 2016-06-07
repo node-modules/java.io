@@ -198,5 +198,23 @@ describe('output.test.js', function () {
       obj.$.foo = null;
       readObj.should.eql(obj);
     });
+
+     it('write bolck header', function () {
+      var out = new OutputStream();
+      out.writeBlockHeader(5);
+      out.writeBlockHeader(256);
+      out.writeBlockHeader(512);
+      out.writeBlockHeader(1024);
+      out.writeBlockHeader(2029);
+      out.writeBlockHeader(8888);
+
+      var ins = new InputStream(out.buf);
+      ins.readBlockHeader().should.eql(5);
+      ins.readBlockHeader().should.eql(256);
+      ins.readBlockHeader().should.eql(512);
+      ins.readBlockHeader().should.eql(1024);
+      ins.readBlockHeader().should.eql(2029);
+      ins.readBlockHeader().should.eql(8888);
+    });
   });
 });
