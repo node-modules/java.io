@@ -17,7 +17,7 @@ A node implement of "java.io.InputObjectStream.readObject()" and "java.io.Output
 ## Protocol
 
 - [Object Serialization Stream Protocol](http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html) (A protocal is not all, still need to refer to the implementation.)
-- [Object Serialization Stream Protocol Mind Node](https://www.dropbox.com/s/chqbm91wl5wx2oa/Object%20Serialization%20Stream%20Protocol.pdf)
+- [Object Serialization Stream Protocol Mind Node](https://www.dropbox.com/s/vfom3gz5t13h3w6/Object%20Serialization%20Stream%20Protocol.pdf)
 
 
 ## Install
