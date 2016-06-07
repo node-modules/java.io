@@ -1,4 +1,12 @@
 
+2.1.2 / 2016-06-08
+==================
+
+  * chore: fix Object Serialization Stream Protocol Mind Node link
+  * deps: upgrade all deps
+  * chore: remove unuse comments
+  * fix: write longer bytes block header
+
 2.1.1 / 2015-10-28
 ==================
 
