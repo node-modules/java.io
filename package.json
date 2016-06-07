@@ -2,27 +2,28 @@
   "name": "java.io",
   "version": "2.1.1",
   "description": "Object Serialization Stream Protocol javascript implement",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "mocha -R spec test/*.test.js",
     "test-cov": "istanbul cover _mocha -- test/*.test.js",
     "lint": "jshint .",
     "ci": "npm run test-cov",
-    "autod": "autod -w --prefix '~'",
-    "contributors": "contributors -f plain -o AUTHORS"
+    "autod": "autod -w --prefix '~'"
   },
   "dependencies": {
-    "byte": "~1.1.1",
-    "debug": "~2.1.0",
-    "utility": "~1.2.1"
+    "byte": "^1.1.5",
+    "debug": "^2.2.0",
+    "utility": "^1.8.0"
   },
   "devDependencies": {
     "autod": "*",
-    "contributors": "*",
     "istanbul": "*",
     "jshint": "*",
     "mocha": "*",
-    "should": "~4.3.0"
+    "should": "4"
   },
   "homepage": "https://github.com/node-modules/java.io",
   "repository": {
@@ -44,6 +45,6 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
+  "author": "fengmk2 <fengmk2@gmail.com> (https://fengmk2.com)",
   "license": "MIT"
 }
