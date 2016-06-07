@@ -1,13 +1,3 @@
-/**!
- * java.io - test/serialization/v2/input.test.js
- *
- * Copyright(c) Alibaba Group Holding Limited.
- * MIT Licensed
- *
- * Authors:
- *   宗羽 <xiaochen.gaoxc@alibaba-inc.com> (http://gxcsoccer.github.com)
- */
-
 'use strict';
 
 /**

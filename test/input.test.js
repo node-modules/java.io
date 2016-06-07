@@ -1,19 +1,3 @@
-/**!
- * java.io - test/serialization/v2/input.test.js
- *
- * Copyright(c) Alibaba Group Holding Limited.
- * MIT Licensed
- *
- * Authors:
- *   苏千 <suqian.yf@alipay.com> (http://fengmk2.github.com)
- */
-
-/*
-console.log(require('util').inspect(
-  ObjectInputStream.read(utils.bytes('boolean/true'), true),
-  {depth: null}))
-*/
-
 'use strict';
 
 /**

@@ -1,13 +1,3 @@
-/**!
- * java.io - test/serialization/v2/input.test.js
- *
- * Copyright(c) Alibaba Group Holding Limited.
- * MIT Licensed
- *
- * Authors:
- *   fool2fish <fool2fish@gmail.com> (http://fool2fish.github.com)
- */
-
 'use strict';
 
 /**

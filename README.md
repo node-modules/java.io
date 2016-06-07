@@ -192,4 +192,4 @@ Builtin classes:
 
 ## License
 
-MIT
+[MIT](LICENSE)
