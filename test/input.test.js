@@ -481,6 +481,133 @@ describe('input.test.js', function () {
     });
   });
 
+  describe('java.util.Date', function() {
+    it('should read date', function() {
+      var ret = ObjectInputStream.read(new Buffer('aced00057372000e6a6176612e7574696c2e44617465686a81014b5974190300007870770800000158a9264e2078', 'hex'), true);
+      ret.should.eql({
+        $: {},
+        $class: {
+          name: 'java.util.Date',
+          serialVersionUID: '7523967970034938905',
+          flags: 3,
+          fields: [],
+          superClass: null,
+        },
+        _$: new Date('2016-11-28T04:16:49.696Z'),
+      });
+
+      ret = ObjectInputStream.read(new Buffer('aced00057372000e6a6176612e7574696c2e44617465686a81014b5974190300007870770800000158a929170178', 'hex'));
+      ret.should.eql(new Date('2016-11-28T04:19:52.193Z'));
+    });
+  });
+
+  describe('java.util.HashSet', function() {
+    it('should read HashSet', function() {
+      var ret = ObjectInputStream.read(new Buffer('aced0005737200116a6176612e7574696c2e48617368536574ba44859596b8b7340300007870770c000000103f40000000000002737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000007b737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c756578700178', 'hex'), true);
+      ret.should.eql({
+        $: {},
+        $class: {
+          name: 'java.util.HashSet',
+          serialVersionUID: '-5024744406713321676',
+          flags: 3,
+          fields: [],
+          superClass: null,
+        },
+        _$: [{
+          $: {
+            value: 123,
+          },
+          $class: {
+            name: 'java.lang.Integer',
+            serialVersionUID: '1360826667806852920',
+            flags: 2,
+            fields: [{
+              type: 'I',
+              name: 'value',
+            }],
+            superClass: {
+              name: 'java.lang.Number',
+              serialVersionUID: '-8742448824652078965',
+              flags: 2,
+              fields: [],
+              superClass: null,
+            },
+          }
+        }, {
+          $: {
+            value: true,
+          },
+          $class: {
+            name: 'java.lang.Boolean',
+            serialVersionUID: '-3665804199014368530',
+            flags: 2,
+            fields: [{
+              type: 'Z',
+              name: 'value',
+            }],
+            superClass: null,
+          },
+        }],
+      });
+
+      ret = ObjectInputStream.read(new Buffer('aced0005737200116a6176612e7574696c2e48617368536574ba44859596b8b7340300007870770c000000103f40000000000002737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000007b737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c756578700178', 'hex'));
+      ret.should.eql([123, true]);
+    });
+
+    it('should throw error if capacity is invalid', function() {
+      (function() {
+        ObjectInputStream.read(new Buffer('aced0005737200116a6176612e7574696c2e48617368536574ba44859596b8b7340300007870770cffffffff3f40000000000002737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000007b737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c756578700178', 'hex'));
+      }).should.throw('Illegal capacity: -1');
+    });
+
+    it('should throw Error if loadFactor is invalid', function() {
+      (function() {
+        ObjectInputStream.read(new Buffer('aced0005737200116a6176612e7574696c2e48617368536574ba44859596b8b7340300007870770c000000100000000000000002737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000007b737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c756578700178', 'hex'));
+      }).should.throw('Illegal load factor: 0');
+    });
+
+    it('should throw Error if size is invalid', function() {
+      (function() {
+        ObjectInputStream.read(new Buffer('aced0005737200116a6176612e7574696c2e48617368536574ba44859596b8b7340300007870770c000000103f400000ffffffff737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000007b737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c756578700178', 'hex'));
+      }).should.throw('Illegal size: -1');
+    });
+  });
+
+  describe('java.util.TreeSet', function() {
+    it('should read TreeSet', function() {
+      var classDesc = {
+        name: 'java.lang.Integer',
+        serialVersionUID: '1360826667806852920',
+        flags: 2,
+        fields: [{ type: 'I', name: 'value' }],
+        superClass: {
+          name: 'java.lang.Number',
+          serialVersionUID: '-8742448824652078965',
+          flags: 2,
+          fields: [],
+          superClass: null,
+        },
+      };
+      ObjectInputStream.read(new Buffer('aced0005737200116a6176612e7574696c2e54726565536574dd98509395ed875b030000787070770400000002737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000007b7371007e00020000014178', 'hex'), true).should.eql({
+        $: {},
+        $class: {
+          name: 'java.util.TreeSet',
+          serialVersionUID: '-2479143000061671589',
+          flags: 3,
+          fields: [],
+          superClass: null,
+        },
+        _$: [{
+          $: { value: 123 },
+          $class: classDesc,
+        }, {
+          $: { value: 321 },
+          $class: classDesc,
+        }],
+      });
+    });
+  });
+
   function basicCheck(obj, pos) {
     Object.keys(obj).length.should.equal(2);
     var javaUrl = 'http://docs.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html#5849==';
