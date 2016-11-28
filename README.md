@@ -153,7 +153,11 @@ io.addObject({{className}}, {{class}});
 Builtin classes:
 
 - [java.util.ArrayList](./lib/objects/array_list.js)
+- [java.util.LinkedList](./lib/objects/linked_list.js)
 - [java.util.HashMap](./lib/objects/hash_map.js)
+- [java.util.HashSet](./lib/objects/hash_set.js)
+- [java.util.TreeSet](./lib/objects/tree_set.js)
+- [java.util.Date](./lib/objects/date.js)
 
 ## Data structure
 

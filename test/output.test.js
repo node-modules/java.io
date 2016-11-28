@@ -207,4 +207,137 @@ describe('output.test.js', function () {
       ins.readBlockHeader().should.eql(8888);
     });
   });
+
+  describe('Date', function() {
+    it('should write Date', function() {
+      OutputStream.write({
+        $: {},
+        $class: {
+          name: 'java.util.Date',
+          serialVersionUID: '7523967970034938905',
+          flags: 3,
+          fields: [],
+          superClass: null,
+        },
+        _$: new Date('2016-11-28T04:16:49.696Z'),
+      }).should.eql(new Buffer('aced00057372000e6a6176612e7574696c2e44617465686a81014b5974190300007870770800000158a9264e2078', 'hex'));
+    });
+  });
+
+  describe('HashSet', function() {
+    it('should write HashSet', function() {
+      OutputStream.write({
+        $: {},
+        $class: {
+          name: 'java.util.HashSet',
+          serialVersionUID: '-5024744406713321676',
+          flags: 3,
+          fields: [],
+          superClass: null,
+        },
+        _$: [{
+          $: {
+            value: 123,
+          },
+          $class: {
+            name: 'java.lang.Integer',
+            serialVersionUID: '1360826667806852920',
+            flags: 2,
+            fields: [{
+              type: 'I',
+              name: 'value',
+            }],
+            superClass: {
+              name: 'java.lang.Number',
+              serialVersionUID: '-8742448824652078965',
+              flags: 2,
+              fields: [],
+              superClass: null,
+            },
+          }
+        }, {
+          $: {
+            value: true,
+          },
+          $class: {
+            name: 'java.lang.Boolean',
+            serialVersionUID: '-3665804199014368530',
+            flags: 2,
+            fields: [{
+              type: 'Z',
+              name: 'value',
+            }],
+            superClass: null,
+          },
+        }],
+      }).should.eql(new Buffer('aced0005737200116a6176612e7574696c2e48617368536574ba44859596b8b7340300007870770c000000103f40000000000002737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000007b737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c756578700178', 'hex'));
+    });
+
+    it('should write HashSet with big size', function() {
+      var array = [];
+      for (var i = 0; i < 13; ++i) {
+        array.push({
+          $: {
+            value: true,
+          },
+          $class: {
+            name: 'java.lang.Boolean',
+            serialVersionUID: '-3665804199014368530',
+            flags: 2,
+            fields: [{
+              type: 'Z',
+              name: 'value',
+            }],
+            superClass: null,
+          },
+        });
+      }
+      OutputStream.write({
+        $: {},
+        $class: {
+          name: 'java.util.HashSet',
+          serialVersionUID: '-5024744406713321676',
+          flags: 3,
+          fields: [],
+          superClass: null,
+        },
+        _$: array,
+      }).should.eql(new Buffer('aced0005737200116a6176612e7574696c2e48617368536574ba44859596b8b7340300007870770c000000203f4000000000000d737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c7565787001737200116a6176612e6c616e672e426f6f6c65616ecd207280d59cfaee0200015a000576616c756578700178', 'hex'));
+    });
+  });
+
+  describe('TreeSet', function() {
+    it('should write TreeSet ok', function() {
+      var classDesc = {
+        name: 'java.lang.Integer',
+        serialVersionUID: '1360826667806852920',
+        flags: 2,
+        fields: [{ type: 'I', name: 'value' }],
+        superClass: {
+          name: 'java.lang.Number',
+          serialVersionUID: '-8742448824652078965',
+          flags: 2,
+          fields: [],
+          superClass: null,
+        },
+      };
+      var ret = OutputStream.write({
+        $: {},
+        $class: {
+          name: 'java.util.TreeSet',
+          serialVersionUID: '-2479143000061671589',
+          flags: 3,
+          fields: [],
+          superClass: null,
+        },
+        _$: [{
+          $: { value: 123 },
+          $class: classDesc,
+        }, {
+          $: { value: 321 },
+          $class: classDesc,
+        }],
+      }).should.eql(new Buffer('aced0005737200116a6176612e7574696c2e54726565536574dd98509395ed875b030000787070770400000002737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000007b7371007e00020000014178', 'hex'));
+    });
+  });
 });
