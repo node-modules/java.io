@@ -573,6 +573,43 @@ describe('input.test.js', function () {
     });
   });
 
+  describe('java.util.TreeMap', function() {
+    it('should read TreeMap', function() {
+      var buf = new Buffer('aced0005737200116a6176612e7574696c2e547265654d61700cc1f63e2d256ae60300014c000a636f6d70617261746f727400164c6a6176612f7574696c2f436f6d70617261746f723b787070770400000002740003616765737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b02000078700000007b7400046e616d65740005706574657278', 'hex');
+      ObjectInputStream.read(buf, true).should.eql({
+        $: { comparator: null },
+        $class: {
+          name: 'java.util.TreeMap',
+          serialVersionUID: '919286545866124006',
+          flags: 3,
+          fields: [{ type: 'L', name: 'comparator', classname: 'Ljava/util/Comparator;' }],
+          superClass: null,
+        },
+        _$: {
+          age: {
+            $: { value: 123 },
+            $class: {
+              name: 'java.lang.Integer',
+              serialVersionUID: '1360826667806852920',
+              flags: 2,
+              fields: [{ type: 'I', name: 'value' }],
+              superClass: {
+                name: 'java.lang.Number',
+                serialVersionUID: '-8742448824652078965',
+                flags: 2,
+                fields: [],
+                superClass: null,
+              },
+            }
+          },
+          name: 'peter'
+        }
+      });
+
+      ObjectInputStream.read(buf).should.eql({ age: 123, name: 'peter' });
+    });
+  });
+
   describe('java.util.TreeSet', function() {
     it('should read TreeSet', function() {
       var classDesc = {
