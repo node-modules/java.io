@@ -700,4 +700,22 @@ describe('input.test.js', function () {
       basicCheck(largeObj, 19);
     });
   });
+
+  it('should dump error buf while readObject', function() {
+    (function() {
+      var ois = new ObjectInputStream(Buffer.from([0, 0, 0, 0]));
+      ois.read(true);
+    }).should.throw(Error, {
+      name: 'InvaildStreamHeaderError',
+      data: 'AAAAAA==',
+    });
+
+    (function() {
+      var ois = new ObjectInputStream(Buffer.from([0xac, 0xed, 0x00, 0x05, 0x00]));
+      ois.read(true);
+    }).should.throw(Error, {
+      name: 'InvaildStreamContentError',
+      data: 'rO0ABQA=',
+    });
+  });
 });
