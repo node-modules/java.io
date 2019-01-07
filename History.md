@@ -1,4 +1,10 @@
 
+2.4.0 / 2019-01-08
+==================
+
+**features**
+  * [[`afcfb48`](http://github.com/node-modules/java.io/commit/afcfb4881ba18c72f86bd7dd453f523a371e3e35)] - feat: dump buf while decode error occurred (#27) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
 2.3.0 / 2016-11-29
 ==================
 
